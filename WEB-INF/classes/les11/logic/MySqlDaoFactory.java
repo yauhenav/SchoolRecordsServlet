@@ -9,7 +9,8 @@ public class MySqlDaoFactory implements DaoFactory {
 	Connection connection = null;
 	
 	// Constructor
-    public MySqlDaoFactory() throws SQLException, IOException, FileNotFoundException {
+    public MySqlDaoFactory() throws SQLException, IOException, FileNotFoundException, ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver");
 		Properties props = new Properties();
 		InputStream stream = this.getClass().getResourceAsStream("config.properties");
 		props.load(stream);

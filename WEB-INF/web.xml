@@ -5,7 +5,7 @@
 
   <servlet>
     <servlet-name>daoApp</servlet-name>
-    <servlet-class>students.web.daoAppServlet</servlet-class>
+    <servlet-class>les11.web.daoAppServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>

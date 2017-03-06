@@ -4,21 +4,30 @@ import java.sql.*;
 import java.util.*;
 import java.io.*;
 
-public class Demo {
-	public static void main (String args[]) {
-			
-			DaoFactory interDaoFact = null;
-			StudentDao interDaoStud = null;
-			SubjectDao interDaoSub = null;
-			MarkDao interDaoMar = null;
+public class Management {
+	
+	DaoFactory interDaoFact = null;
+	StudentDao interDaoStud = null;
+	SubjectDao interDaoSub = null;
+	MarkDao interDaoMar = null;
+	
+	public Management() throws SQLException, IOException, ClassNotFoundException {
 		// Establish connection with the DB
 		try {		
 			interDaoFact = new MySqlDaoFactory ();
+		} catch (SQLException | IOException | ClassNotFoundException exc) {
+			exc.printStackTrace();
+		}
+	}
 		
-		//Retrieve and display all students
+		//Method for retrieving and displaying all students
+		public List<Student> displayAllStudents() throws SQLException, DaoException {
 			interDaoStud = interDaoFact.getStudentDao();
 			List<Student> showStuds0 = interDaoStud.getAll();
-			System.out.println ("Here's a list of all students in the DB");
+			return showStuds0;
+		}
+	}
+/* 			System.out.println ("Here's a list of all students in the DB");
 			Iterator<Student> itrstud0 = showStuds0.iterator();
 			while (itrstud0.hasNext()) {
 				Student element = itrstud0.next();
@@ -218,5 +227,4 @@ public class Demo {
 				exc.printStackTrace();
 			}
 		}
-	}
-}
+	} */
