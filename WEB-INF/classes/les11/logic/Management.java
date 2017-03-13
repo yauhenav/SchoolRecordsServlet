@@ -20,6 +20,15 @@ public class Management {
 		}
 	}
 		
+		// Method for retrieving and displaying student as per specified ID
+		public Student displayOneStudent(int key) throws SQLException, DaoException {
+			interDaoStud = interDaoFact.getStudentDao();
+			Student dummyStud1 = interDaoStud.read(key);
+			return dummyStud1;
+		}
+		
+		
+		
 		//Method for retrieving and displaying all students
 		public List<Student> displayAllStudents() throws SQLException, DaoException {
 			interDaoStud = interDaoFact.getStudentDao();
