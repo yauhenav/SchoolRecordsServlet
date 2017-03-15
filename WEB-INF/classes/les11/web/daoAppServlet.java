@@ -16,17 +16,20 @@ public class daoAppServlet extends HttpServlet {
 			resp.setContentType("text/html;charset=utf-8");
 			PrintWriter pw = resp.getWriter();
 			
-			/* String paramName = null;
-			String paramVal  = null;
-			
-			Enumeration<String> enmr=req.getParameterNames();
-			while(enmr.hasMoreElements()) {
-				paramName=(String)enmr.nextElement(); // parameter name
-				paramVal=req.getParameter(paramName); // parameter value
-			} */
-			
-			
-			if (req.getParameter("show_student_ID") != null) {
+			if (req.getParameter("show_all_students") != null) {
+				pw.println("<B>Here's a list of all students in the DB</B>");
+				pw.println("<table border=1>");
+				List<Student> lst = mngob.displayAllStudents();
+				Iterator<Student> itrstud0 = lst.iterator();
+				while (itrstud0.hasNext()) {
+					pw.println("<tr>");
+					Student element = itrstud0.next();
+					pw.println("<td>" + element.toString() + "</td>");
+					pw.println("</tr>");
+				}
+			} 
+					
+			else if (req.getParameter("show_student_ID") != null) {
 				pw.println("<B>Here goes one student from selected key</B>");
 				pw.println("<table border=1>");
 				String paramVal = req.getParameter("show_student_ID");
@@ -40,8 +43,7 @@ public class daoAppServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 				throw new ServletException(e);
-		}
-				
+		}				
     }
 }
 				

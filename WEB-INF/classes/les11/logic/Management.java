@@ -11,11 +11,14 @@ public class Management {
 	SubjectDao interDaoSub = null;
 	MarkDao interDaoMar = null;
 	
-	public Management() throws SQLException, IOException, ClassNotFoundException {
-		// Establish connection with the DB
+	public Management() throws SQLException, IOException, ClassNotFoundException, DaoException {
+		// Establish connection with the DB & create required objects
 		try {		
 			interDaoFact = new MySqlDaoFactory ();
-		} catch (SQLException | IOException | ClassNotFoundException exc) {
+			interDaoStud = interDaoFact.getStudentDao();
+			interDaoSub = interDaoFact.getSubjectDao();
+			interDaoMar = interDaoFact.getMarkDao();
+		} catch (SQLException | IOException | ClassNotFoundException | DaoException exc) {
 			exc.printStackTrace();
 		}
 	}
@@ -26,9 +29,7 @@ public class Management {
 			Student dummyStud1 = interDaoStud.read(key);
 			return dummyStud1;
 		}
-		
-		
-		
+				
 		//Method for retrieving and displaying all students
 		public List<Student> displayAllStudents() throws SQLException, DaoException {
 			interDaoStud = interDaoFact.getStudentDao();
