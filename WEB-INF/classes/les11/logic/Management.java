@@ -11,8 +11,9 @@ public class Management {
 	SubjectDao interDaoSub = null;
 	MarkDao interDaoMar = null;
 	
+	// Constructor that establishes connection with the DB & creates required objects
 	public Management() throws SQLException, IOException, ClassNotFoundException, DaoException {
-		// Establish connection with the DB & create required objects
+		
 		try {		
 			interDaoFact = new MySqlDaoFactory ();
 			interDaoStud = interDaoFact.getStudentDao();
@@ -23,20 +24,30 @@ public class Management {
 		}
 	}
 		
-		// Method for retrieving and displaying student as per specified ID
-		public Student displayOneStudent(int key) throws SQLException, DaoException {
-			interDaoStud = interDaoFact.getStudentDao();
-			Student dummyStud1 = interDaoStud.read(key);
-			return dummyStud1;
-		}
-				
-		//Method for retrieving and displaying all students
-		public List<Student> displayAllStudents() throws SQLException, DaoException {
-			interDaoStud = interDaoFact.getStudentDao();
-			List<Student> showStuds0 = interDaoStud.getAll();
-			return showStuds0;
-		}
+	// Method for retrieving and displaying student as per specified ID
+	public Student displayOneStudent(int key) throws SQLException, DaoException {
+		interDaoStud = interDaoFact.getStudentDao();
+		Student dummyStud1 = interDaoStud.read(key);
+		return dummyStud1;
 	}
+				
+	//Method for retrieving and displaying all students
+	public List<Student> displayAllStudents() throws SQLException, DaoException {
+		interDaoStud = interDaoFact.getStudentDao();
+		List<Student> showStuds0 = interDaoStud.getAll();
+		return showStuds0;
+	}
+		
+	// Add a new entry into DB as per corresponding received 'Student' object and display the result
+	public void addStudent(int id, String name, String surname) throws SQLException, DaoException {
+		//System.out.println("Here goes a new student added to DB");
+		Student dummyStud4 = new Student();
+		dummyStud4.setId(id);
+		dummyStud4.setName(name);
+		dummyStud4.setSurname(surname);
+		interDaoStud.create(dummyStud4);
+	}
+}
 /* 			System.out.println ("Here's a list of all students in the DB");
 			Iterator<Student> itrstud0 = showStuds0.iterator();
 			while (itrstud0.hasNext()) {
@@ -78,21 +89,7 @@ public class Management {
 			Student dummyStud1 = interDaoStud.read(5);
 			System.out.println(dummyStud1.toString());
 		
-		// Add a new entry into DB as per corresponding received 'Student' object and display the result
-			System.out.println("Here goes a new student added to DB");
-			Student dummyStud4 = new Student();
-			dummyStud4.setId(11);
-			dummyStud4.setName("Jaques");
-			dummyStud4.setSurname("Chiraques");
-			interDaoStud.create(dummyStud4);
-			List<Student> showStuds2 = interDaoStud.getAll();
-			System.out.println ("Here's a list of all students in the DB after addition");
-			Iterator<Student> itrstud2 = showStuds2.iterator();
-			while (itrstud2.hasNext()) {
-				Student element = itrstud2.next();
-				System.out.println (element);
-			}
-			
+
 		// Update DB entry as per specified 'Student' object and display the result
 			System.out.println("Here goes updated student");
 			Student dummyStud2 = new Student();

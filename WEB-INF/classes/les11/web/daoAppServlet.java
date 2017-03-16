@@ -42,6 +42,10 @@ public class daoAppServlet extends HttpServlet {
 				pw.println("</tr>");
 				pw.println("</table>");
 			}
+			
+			else if (req.getParameter)
+			
+			
 		} catch (DaoException | SQLException | ClassNotFoundException exc) {
 				exc.printStackTrace();
 		}				
