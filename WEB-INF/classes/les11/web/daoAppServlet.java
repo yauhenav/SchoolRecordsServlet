@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.*;
 
 import les11.logic.*;
 
@@ -41,8 +42,8 @@ public class daoAppServlet extends HttpServlet {
 				pw.println("</tr>");
 				pw.println("</table>");
 			}
-		} catch (Exception e) {
-				throw new ServletException(e);
+		} catch (DaoException | SQLException | ClassNotFoundException exc) {
+				exc.printStackTrace();
 		}				
     }
 }
