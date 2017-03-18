@@ -53,6 +53,23 @@ public class daoAppServlet extends HttpServlet {
 				mngob.addStudent(id, nameValue, surnameValue);				
 			}
 			
+			else if(req.getParameter("update_student_ID") != null) {
+				pw.println("<B>Update of existing student</B>");
+				pw.println("Go to home page and press button in Show all students section to check if student was updated");
+				String idValue = req.getParameter("update_student_ID");
+				int id = Integer.parseInt(idValue);
+				String nameValue = req.getParameter("update_student_name");
+				String surnameValue = req.getParameter("update_student_surname");
+				mngob.updateStudent(id, nameValue, surnameValue);				
+			}
+			
+			else if(req.getParameter("delete_student_ID") != null) {
+				pw.println("<B>Deletion of existing student</B>");
+				pw.println("Go to home page and press button in Show all students section to check if student was deleted");
+				String idValue = req.getParameter("delete_student_ID");
+				int id = Integer.parseInt(idValue);
+				mngob.deleteStudent(id);
+			}
 			
 		} catch (DaoException | SQLException | ClassNotFoundException exc) {
 				exc.printStackTrace();

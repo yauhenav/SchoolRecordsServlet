@@ -48,5 +48,40 @@
 <input type=submit value="Add new student"> 
 </form>
 
+<form name="Form4" 
+  method="get" 
+  action="http://localhost:8080/daoApp/daoApp"> 
+<table> 
+<tr> 
+  <td><B>Enter student attributes to update an existing student from DB</td> 
+</tr>
+<tr>
+  <td><B>Enter student ID</td>
+  <td><input type=number name="update_student_ID" size="25" value=""></td>
+ </tr>
+  <tr>
+  <td><B>Enter student name</td>
+  <td><input type=text name="update_student_name" size="25" value=""></td>
+ </tr>
+  <tr>
+  <td><B>Enter student surname</td>
+  <td><input type=text name="update_student_surname" size="25" value=""></td>
+ </tr>
+ </table> 
+<input type=submit value="Update student"> 
+</form>
+
+<form name="Form5" 
+  method="get" 
+  action="http://localhost:8080/daoApp/daoApp"> 
+<table> 
+<tr> 
+  <td><B>To delete existing student, enter student's ID</td> 
+  <td><input type=number name="delete_student_ID" size="25" value=""></td> 
+</tr> 
+</table> 
+<input type=submit value="Delete student"> 
+</form>
+
 </body> 
 </html>

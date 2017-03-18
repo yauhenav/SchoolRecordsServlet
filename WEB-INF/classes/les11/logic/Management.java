@@ -13,16 +13,15 @@ public class Management {
 	
 	// Constructor that establishes connection with the DB & creates required objects
 	public Management() throws SQLException, IOException, ClassNotFoundException, DaoException {
-		
-		try {		
+		try {
 			interDaoFact = new MySqlDaoFactory ();
 			interDaoStud = interDaoFact.getStudentDao();
 			interDaoSub = interDaoFact.getSubjectDao();
 			interDaoMar = interDaoFact.getMarkDao();
 		} catch (SQLException | IOException | ClassNotFoundException | DaoException exc) {
 			exc.printStackTrace();
+			}
 		}
-	}
 		
 	// Method for retrieving and displaying student as per specified ID
 	public Student displayOneStudent(int key) throws SQLException, DaoException {
@@ -40,12 +39,25 @@ public class Management {
 		
 	// Add a new entry into DB as per corresponding received 'Student' object and display the result
 	public void addStudent(int id, String name, String surname) throws SQLException, DaoException {
-		//System.out.println("Here goes a new student added to DB");
 		Student dummyStud4 = new Student();
 		dummyStud4.setId(id);
 		dummyStud4.setName(name);
 		dummyStud4.setSurname(surname);
 		interDaoStud.create(dummyStud4);
+	}
+	
+	// Update DB entry as per specified 'Student' object and display the result
+	public void updateStudent(int id, String name, String surname) throws SQLException, DaoException {
+		Student dummyStud2 = new Student();
+		dummyStud2.setId(id);
+		dummyStud2.setName(name);
+		dummyStud2.setSurname(surname);
+		interDaoStud.update (dummyStud2);
+	}
+	
+	// Delete DB entry as per specified 'Student' object and display the result
+	public void deleteStudent(int id) throws SQLException, DaoException {
+		interDaoStud.delete (id);		
 	}
 }
 /* 			

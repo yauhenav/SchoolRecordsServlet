@@ -89,9 +89,9 @@ public class MySqlStudentDao implements StudentDao {
 
     // Removes the DB entry as per corresponding received object
     @Override 
-    public void delete(Student student) throws DaoException {
+    public void delete(int key) throws DaoException {
 		try {
-			psDelStud.setInt (1, student.getId());
+			psDelStud.setInt (1, key);
 			psDelStud.execute();
 		} catch (SQLException exc) {
 			throw new DaoException ("Exception for DAO");
