@@ -48,12 +48,7 @@ public class Management {
 		interDaoStud.create(dummyStud4);
 	}
 }
-/* 			System.out.println ("Here's a list of all students in the DB");
-			Iterator<Student> itrstud0 = showStuds0.iterator();
-			while (itrstud0.hasNext()) {
-				Student element = itrstud0.next();
-				System.out.println (element);
-			}
+/* 			
 		
 		// Retrieve and display all subjects
 			interDaoSub = interDaoFact.getSubjectDao();

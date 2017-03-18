@@ -43,7 +43,15 @@ public class daoAppServlet extends HttpServlet {
 				pw.println("</table>");
 			}
 			
-			else if (req.getParameter)
+			else if (req.getParameter("new_student_ID") != null) {
+				pw.println("<B>Addition of new student</B>");
+				pw.println("Go to home page and press button in Show all students section to check if student was added");
+				String idValue = req.getParameter("new_student_ID");
+				int id = Integer.parseInt(idValue);
+				String nameValue = req.getParameter("new_student_name");
+				String surnameValue = req.getParameter("new_student_surname");
+				mngob.addStudent(id, nameValue, surnameValue);				
+			}
 			
 			
 		} catch (DaoException | SQLException | ClassNotFoundException exc) {

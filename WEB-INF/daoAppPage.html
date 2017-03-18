@@ -30,11 +30,22 @@
   action="http://localhost:8080/daoApp/daoApp"> 
 <table> 
 <tr> 
-  <td><B>Enter student attributes</td> 
-  <td><input type=textbox name="student_ID" size="25" value=""></td> 
-</tr> 
-</table> 
-<input type=submit value="Show student"> 
+  <td><B>Enter student attributes to add new student into DB</td> 
+</tr>
+<tr>
+  <td><B>Enter student ID</td>
+  <td><input type=number name="new_student_ID" size="25" value=""></td>
+ </tr>
+  <tr>
+  <td><B>Enter student name</td>
+  <td><input type=text name="new_student_name" size="25" value=""></td>
+ </tr>
+  <tr>
+  <td><B>Enter student surname</td>
+  <td><input type=text name="new_student_surname" size="25" value=""></td>
+ </tr>
+ </table> 
+<input type=submit value="Add new student"> 
 </form>
 
 </body> 
