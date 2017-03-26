@@ -70,6 +70,21 @@ public class daoAppServlet extends HttpServlet {
 				int id = Integer.parseInt(idValue);
 				mngob.deleteStudent(id);
 			}
+
+			else if (req.getParameter("show_subject_ID") != null) {
+				pw.println("<B>Here goes the subject from selected key</B>");
+				pw.println("<table border=1>");
+				String paramVal = req.getParameter("show_subject_ID");
+				int key = Integer.parseInt(paramVal);
+				Subject element = mngob.displayOneSubject(key);
+				pw.println("<tr>");
+				pw.println("<td>" + element + "</td>");
+				//pw.println(element.toString());
+				pw.println("</tr>");
+				pw.println("</table>");
+			}
+			
+			
 			
 		} catch (DaoException | SQLException | ClassNotFoundException exc) {
 				exc.printStackTrace();

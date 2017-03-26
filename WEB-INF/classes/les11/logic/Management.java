@@ -59,6 +59,14 @@ public class Management {
 	public void deleteStudent(int id) throws SQLException, DaoException {
 		interDaoStud.delete (id);		
 	}
+	
+	// Retrieve and display subject as per specified ID
+	public Subject displayOneSubject(int key) throws SQLException, DaoException {
+		Subject dummySubj1 = interDaoSub.read(key);
+		return dummySubj1;
+	}
+	
+	
 }
 /* 			
 		
