@@ -120,6 +120,17 @@ public class daoAppServlet extends HttpServlet {
 				int id = Integer.parseInt(idValue);
 				mngob.deleteSubject(id);
 			}
+			else if (req.getParameter("show_mark_ID") != null) {
+				pw.println("<B>Here goes the mark from selected key</B>");
+				pw.println("<table border=1>");
+				String paramVal = req.getParameter("show_mark_ID");
+				int key = Integer.parseInt(paramVal);
+				Mark element = mngob.displayOneMark(key);
+				pw.println("<tr>");
+				pw.println("<td>" + element + "</td>");
+				pw.println("</tr>");
+				pw.println("</table>");
+			}
 			
 			
 			
