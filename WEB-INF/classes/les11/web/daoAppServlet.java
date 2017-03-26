@@ -84,6 +84,19 @@ public class daoAppServlet extends HttpServlet {
 				pw.println("</table>");
 			}
 			
+			else if (req.getParameter("show_all_subjects") != null) {
+				pw.println("<B>Here's a list of all subjects in the DB</B>");
+				pw.println("<table border=1>");
+				List<Subject> lst = mngob.displayAllSubjects();
+				Iterator<Subject> itrsub0 = lst.iterator();
+				while (itrsub0.hasNext()) {
+					pw.println("<tr>");
+					Subject element = itrsub0.next();
+					pw.println("<td>" + element.toString() + "</td>");
+					pw.println("</tr>");
+				}
+			}
+			
 			
 			
 		} catch (DaoException | SQLException | ClassNotFoundException exc) {

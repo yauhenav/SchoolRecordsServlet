@@ -25,14 +25,12 @@ public class Management {
 		
 	// Method for retrieving and displaying student as per specified ID
 	public Student displayOneStudent(int key) throws SQLException, DaoException {
-		interDaoStud = interDaoFact.getStudentDao();
 		Student dummyStud1 = interDaoStud.read(key);
 		return dummyStud1;
 	}
 				
 	//Method for retrieving and displaying all students
 	public List<Student> displayAllStudents() throws SQLException, DaoException {
-		interDaoStud = interDaoFact.getStudentDao();
 		List<Student> showStuds0 = interDaoStud.getAll();
 		return showStuds0;
 	}
@@ -65,6 +63,12 @@ public class Management {
 		Subject dummySubj1 = interDaoSub.read(key);
 		return dummySubj1;
 	}
+	// Retrieve and display all subjects
+	public List<Subject> displayAllSubjects() throws SQLException, DaoException {
+		List<Subject> showSubs0 = interDaoSub.getAll();
+		return showSubs0;
+	}
+	
 	
 	
 }
