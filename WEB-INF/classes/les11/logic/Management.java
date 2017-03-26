@@ -69,6 +69,14 @@ public class Management {
 		return showSubs0;
 	}
 	
+	// Add a new entry into DB as per corresponding received 'Subject' object and display the result
+	public void addSubject(int id, String description) throws SQLException, DaoException {
+		Subject dummySubj3 = new Subject();
+		dummySubj3.setId(id);
+		dummySubj3.setDescription(description);
+		interDaoSub.create(dummySubj3);
+	}
+	
 	
 	
 }

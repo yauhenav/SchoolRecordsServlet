@@ -97,6 +97,14 @@ public class daoAppServlet extends HttpServlet {
 				}
 			}
 			
+			else if (req.getParameter("new_subject_ID") != null) {
+				pw.println("<B>Addition of new subject</B>");
+				pw.println("Go to home page and press button in Show all subjects section to check if subject was added");
+				String idValue = req.getParameter("new_subject_ID");
+				int id = Integer.parseInt(idValue);
+				String descriptionValue = req.getParameter("new_subject_description");
+				mngob.addSubject(id, descriptionValue);				
+			}
 			
 			
 		} catch (DaoException | SQLException | ClassNotFoundException exc) {
