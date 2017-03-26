@@ -105,6 +105,23 @@ public class daoAppServlet extends HttpServlet {
 				String descriptionValue = req.getParameter("new_subject_description");
 				mngob.addSubject(id, descriptionValue);				
 			}
+			else if(req.getParameter("update_subject_ID") != null) {
+				pw.println("<B>Update of existing subject</B>");
+				pw.println("Go to home page and press button in Show all subjects section to check if subject was updated");
+				String idValue = req.getParameter("update_subject_ID");
+				int id = Integer.parseInt(idValue);
+				String descriptionValue = req.getParameter("update_subject_description");
+				mngob.updateSubject(id, descriptionValue);				
+			}
+			else if(req.getParameter("delete_subject_ID") != null) {
+				pw.println("<B>Deletion of existing subject</B>");
+				pw.println("Go to home page and press button in Show all subjects section to check if subject was deleted");
+				String idValue = req.getParameter("delete_subject_ID");
+				int id = Integer.parseInt(idValue);
+				mngob.deleteSubject(id);
+			}
+			
+			
 			
 			
 		} catch (DaoException | SQLException | ClassNotFoundException exc) {

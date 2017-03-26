@@ -15,7 +15,7 @@ public interface SubjectDao {
 	public void update(Subject subject) throws DaoException;
 
     // Removes the DB entry as per corresponding received object
-	public void delete(Subject subject)  throws DaoException;
+	public void delete(int key)  throws DaoException;
 
     // Returns a list of objects corresponding to all DB entries
 	public List<Subject> getAll() throws DaoException;

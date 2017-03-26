@@ -86,9 +86,9 @@ public class MySqlSubjectDao implements SubjectDao {
 	
     // Removes the DB entry as per corresponding received object
     @Override
-    public void delete(Subject subject) throws DaoException {
+    public void delete(int key) throws DaoException {
 		try {
-			psDelSubj.setInt(1, subject.getId());
+			psDelSubj.setInt(1, key);
 			psDelSubj.execute();
 		} catch (SQLException exc) {
 			throw new DaoException ("Exception for DAO");

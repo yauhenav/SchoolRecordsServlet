@@ -77,7 +77,19 @@ public class Management {
 		interDaoSub.create(dummySubj3);
 	}
 	
-	
+	// Update DB entry as per specified 'Subject' object and display the result
+	public void updateSubject(int id, String description) throws SQLException, DaoException {
+		Subject dummySubj2 = new Subject();
+		dummySubj2.setId(id);
+		dummySubj2.setDescription(description);
+		interDaoSub.update(dummySubj2);
+	}
+		
+	// Delete DB entry as per specified 'Subject' object and display the result
+	public void deleteSubject(int id) throws SQLException, DaoException {
+		interDaoSub.delete (id);		
+	}	
+
 	
 }
 /* 			

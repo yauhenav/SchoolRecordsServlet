@@ -125,6 +125,36 @@
 <input type=submit value="Add new subject"> 
 </form>	
 	
+<form name="Form9" 
+  method="get" 
+  action="http://localhost:8080/daoApp/daoApp"> 
+<table> 
+<tr> 
+  <td><B>Enter subject attributes to update an existing subject from DB</td> 
+</tr>
+<tr>
+  <td><B>Enter subject ID</td>
+  <td><input type=number name="update_subject_ID" size="25" value=""></td>
+ </tr>
+  <tr>
+  <td><B>Enter subject description</td>
+  <td><input type=text name="update_subject_description" size="25" value=""></td>
+ </table> 
+<input type=submit value="Update subject"> 
+</form>
+	
+<form name="Form10" 
+  method="get" 
+  action="http://localhost:8080/daoApp/daoApp"> 
+<table> 
+<tr> 
+  <td><B>To delete existing subject, enter subject's ID</td> 
+  <td><input type=number name="delete_subject_ID" size="25" value=""></td> 
+</tr> 
+</table> 
+<input type=submit value="Delete subject"> 
+</form>
+	
 	
 
 </body> 
