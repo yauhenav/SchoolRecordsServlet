@@ -1,0 +1,3 @@
+cd c:\apache-tomcat-8.5.11\webapps\daoApp\WEB-INF\classes
+
+javac -cp "c:\apache-tomcat-8.5.11\webapps\daoApp\WEB-INF\classes;c:\apache-tomcat-8.5.11\lib\servlet-api.jar" les11\logic\controller\*.java les11\logic\dao\*.java les11\logic\dto\*.java les11\logic\exception\*.java les11\logic\mysql\*.java les11\web\*.java

@@ -1,8 +1,13 @@
-package les11.logic;
+package les11.logic.mysql;
 
 import java.sql.*;
 import java.util.*;
 import java.io.*;
+
+import les11.logic.controller.*;
+import les11.logic.dao.*;
+import les11.logic.dto.*;
+import les11.logic.exception.*;
 
 public class MySqlDaoFactory implements DaoFactory {
 	

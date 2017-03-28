@@ -8,7 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 
-import les11.logic.*;
+import les11.logic.controller.*;
+import les11.logic.dao.*;
+import les11.logic.dto.*;
+import les11.logic.exception.*;
+import les11.logic.mysql.*;
 
 public class daoAppServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

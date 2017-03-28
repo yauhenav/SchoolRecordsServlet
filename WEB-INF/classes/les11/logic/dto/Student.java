@@ -1,6 +1,11 @@
-package les11.logic;
+package les11.logic.dto;
 
 import java.util.*;
+
+import les11.logic.controller.*;
+import les11.logic.dao.*;
+import les11.logic.exception.*;
+import les11.logic.mysql.*;
 
 public class Student {
 	public int id;

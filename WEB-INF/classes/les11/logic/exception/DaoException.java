@@ -1,4 +1,4 @@
-package les11.logic;
+package les11.logic.exception;
 
 public class DaoException extends Exception {
 	

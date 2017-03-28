@@ -1,5 +1,0 @@
-cd c:\apache-tomcat-8.5.11\webapps\daoApp\WEB-INF\classes
-
-javac -cp "c:\apache-tomcat-8.5.11\webapps\daoApp\WEB-INF\classes;c:\apache-tomcat-8.5.11\lib\servlet-api.jar" les11\logic\*.java les11\web\*.java
-
-java -cp ".;c:\Program Files (x86)\MySQL\Connector.J 5.1\mysql-connector-java-5.1.40-bin.jar" les11.logic.Demo

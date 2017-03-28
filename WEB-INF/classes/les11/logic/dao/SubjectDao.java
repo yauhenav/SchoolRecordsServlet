@@ -1,7 +1,12 @@
-package les11.logic;
+package les11.logic.dao;
 
 import java.util.*;
 import java.sql.*;
+
+import les11.logic.controller.*;
+import les11.logic.dto.*;
+import les11.logic.exception.*;
+import les11.logic.mysql.*;
 
 public interface SubjectDao {
 
@@ -20,6 +25,6 @@ public interface SubjectDao {
     // Returns a list of objects corresponding to all DB entries
 	public List<Subject> getAll() throws DaoException;
 	
-	// Terminates the connection and all 'PreparedStatement's
+	// Terminates the connection and all 'PreparedStatements
 	public void close() throws DaoException;
 }
