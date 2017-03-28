@@ -9,7 +9,7 @@ import les11.logic.dto.*;
 import les11.logic.exception.*;
 import les11.logic.mysql.*;
 
-public class Management {
+public class Service {
 	
 	DaoFactory interDaoFact = null;
 	StudentDao interDaoStud = null;
@@ -17,7 +17,7 @@ public class Management {
 	MarkDao interDaoMar = null;
 	
 	// Constructor that establishes connection with the DB & creates required objects
-	public Management() throws SQLException, IOException, ClassNotFoundException, DaoException {
+	public Service() throws SQLException, IOException, ClassNotFoundException, DaoException {
 		try {
 			interDaoFact = new MySqlDaoFactory ();
 			interDaoStud = interDaoFact.getStudentDao();
