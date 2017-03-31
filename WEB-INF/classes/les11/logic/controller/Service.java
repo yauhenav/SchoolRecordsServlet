@@ -17,13 +17,13 @@ public class Service {
 	MarkDao interDaoMar = null;
 	
 	// Constructor that establishes connection with the DB & creates required objects
-	public Service() throws SQLException, IOException, ClassNotFoundException, DaoException {
+	public Service() /*throws SQLException, IOException, ClassNotFoundException, DaoException*/ {
 		try {
 			interDaoFact = new MySqlDaoFactory ();
 			interDaoStud = interDaoFact.getStudentDao();
 			interDaoSub = interDaoFact.getSubjectDao();
 			interDaoMar = interDaoFact.getMarkDao();
-		} catch (SQLException | IOException | ClassNotFoundException | DaoException exc) {
+		} catch (DaoException exc) {
 			exc.printStackTrace();
 			}
 		}

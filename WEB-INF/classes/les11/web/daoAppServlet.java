@@ -139,7 +139,7 @@ public class daoAppServlet extends HttpServlet {
 			
 			
 			
-		} catch (DaoException | SQLException | ClassNotFoundException exc) {
+		} catch (DaoException | SQLException exc) {
 				exc.printStackTrace();
 		}				
     }

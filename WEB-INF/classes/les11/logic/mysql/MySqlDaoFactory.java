@@ -14,13 +14,19 @@ public class MySqlDaoFactory implements DaoFactory {
 	Connection connection = null;
 	
 	// Constructor
-    public MySqlDaoFactory() throws SQLException, IOException, FileNotFoundException, ClassNotFoundException {
-		Class.forName("com.mysql.jdbc.Driver");
-		Properties props = new Properties();
-		InputStream stream = this.getClass().getResourceAsStream("config.properties");
-		props.load(stream);
-		this.connection =  DriverManager.getConnection(props.getProperty("url"), props.getProperty("user"), props.getProperty("password"));
-    }
+    public MySqlDaoFactory() throws DaoException {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Properties props = new Properties();
+			InputStream stream = this.getClass().getResourceAsStream("config.properties");
+			props.load(stream);
+			this.connection =  DriverManager.getConnection(props.getProperty("url"), props.getProperty("user"), props.getProperty("password"));
+   	 		} catch (SQLException exc) {
+				throw new DaoException("Exception for DAO");
+			} catch (IOException | ClassNotFoundException exc) {
+				exc.printStackTrace();
+			}
+		}
 	
 	@Override
     public StudentDao getStudentDao() throws DaoException {
