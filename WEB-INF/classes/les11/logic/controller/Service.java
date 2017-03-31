@@ -17,7 +17,7 @@ public class Service {
 	MarkDao interDaoMar = null;
 	
 	// Constructor that establishes connection with the DB & creates required objects
-	public Service() /*throws SQLException, IOException, ClassNotFoundException, DaoException*/ {
+	public Service() {
 		try {
 			interDaoFact = new MySqlDaoFactory ();
 			interDaoStud = interDaoFact.getStudentDao();
@@ -29,19 +29,19 @@ public class Service {
 		}
 		
 	// Method for retrieving and displaying student as per specified ID
-	public Student displayOneStudent(int key) throws SQLException, DaoException {
+	public Student displayOneStudent(int key) throws DaoException {
 		Student dummyStud1 = interDaoStud.read(key);
 		return dummyStud1;
 	}
 				
 	//Method for retrieving and displaying all students
-	public List<Student> displayAllStudents() throws SQLException, DaoException {
+	public List<Student> displayAllStudents() throws DaoException {
 		List<Student> showStuds0 = interDaoStud.getAll();
 		return showStuds0;
 	}
 		
 	// Add a new entry into DB as per corresponding received 'Student' object and display the result
-	public void addStudent(int id, String name, String surname) throws SQLException, DaoException {
+	public void addStudent(int id, String name, String surname) throws DaoException {
 		Student dummyStud4 = new Student();
 		dummyStud4.setId(id);
 		dummyStud4.setName(name);
@@ -50,7 +50,7 @@ public class Service {
 	}
 	
 	// Update DB entry as per specified 'Student' object and display the result
-	public void updateStudent(int id, String name, String surname) throws SQLException, DaoException {
+	public void updateStudent(int id, String name, String surname) throws DaoException {
 		Student dummyStud2 = new Student();
 		dummyStud2.setId(id);
 		dummyStud2.setName(name);
@@ -59,23 +59,23 @@ public class Service {
 	}
 	
 	// Delete DB entry as per specified 'Student' object and display the result
-	public void deleteStudent(int id) throws SQLException, DaoException {
+	public void deleteStudent(int id) throws DaoException {
 		interDaoStud.delete (id);		
 	}
 	
 	// Retrieve and display subject as per specified ID
-	public Subject displayOneSubject(int key) throws SQLException, DaoException {
+	public Subject displayOneSubject(int key) throws DaoException {
 		Subject dummySubj1 = interDaoSub.read(key);
 		return dummySubj1;
 	}
 	// Retrieve and display all subjects
-	public List<Subject> displayAllSubjects() throws SQLException, DaoException {
+	public List<Subject> displayAllSubjects() throws DaoException {
 		List<Subject> showSubs0 = interDaoSub.getAll();
 		return showSubs0;
 	}
 	
 	// Add a new entry into DB as per corresponding received 'Subject' object and display the result
-	public void addSubject(int id, String description) throws SQLException, DaoException {
+	public void addSubject(int id, String description) throws DaoException {
 		Subject dummySubj3 = new Subject();
 		dummySubj3.setId(id);
 		dummySubj3.setDescription(description);
@@ -83,7 +83,7 @@ public class Service {
 	}
 	
 	// Update DB entry as per specified 'Subject' object and display the result
-	public void updateSubject(int id, String description) throws SQLException, DaoException {
+	public void updateSubject(int id, String description) throws DaoException {
 		Subject dummySubj2 = new Subject();
 		dummySubj2.setId(id);
 		dummySubj2.setDescription(description);
@@ -91,12 +91,12 @@ public class Service {
 	}
 		
 	// Delete DB entry as per specified 'Subject' object and display the result
-	public void deleteSubject(int id) throws SQLException, DaoException {
+	public void deleteSubject(int id) throws DaoException {
 		interDaoSub.delete (id);		
 	}	
 
 	// Retrieve and display mark as per specified ID
-	public Mark displayOneMark(int key) throws SQLException, DaoException {
+	public Mark displayOneMark(int key) throws DaoException {
 		Mark dummyMar1 = interDaoMar.read(key);
 		return dummyMar1;
 	}

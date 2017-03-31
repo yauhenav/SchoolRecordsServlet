@@ -10,19 +10,19 @@ import les11.logic.exception.*;
 
 public class MySqlSubjectDao implements SubjectDao {
     private Connection connection;
-	public final static String SQL_CREATE = "INSERT INTO daotrain.SUBJECT (ID, DESCRIPTION) VALUES (?, ?)";
-	public final static String SQL_READ = "SELECT ID, DESCRIPTION FROM daotrain.SUBJECT WHERE ID = ?";
-	public final static String SQL_UPDATE = "UPDATE daotrain.SUBJECT SET DESCRIPTION = ? WHERE ID = ?";
-	public final static String SQL_DELETE = "DELETE FROM daotrain.SUBJECT WHERE ID = ?";
-	public final static String SQL_GETALL = "SELECT ID, DESCRIPTION FROM daotrain.SUBJECT";
+	private final static String SQL_CREATE = "INSERT INTO daotrain.SUBJECT (ID, DESCRIPTION) VALUES (?, ?)";
+	private final static String SQL_READ = "SELECT ID, DESCRIPTION FROM daotrain.SUBJECT WHERE ID = ?";
+	private final static String SQL_UPDATE = "UPDATE daotrain.SUBJECT SET DESCRIPTION = ? WHERE ID = ?";
+	private final static String SQL_DELETE = "DELETE FROM daotrain.SUBJECT WHERE ID = ?";
+	private final static String SQL_GETALL = "SELECT ID, DESCRIPTION FROM daotrain.SUBJECT";
 	
-	public PreparedStatement psCreateSubj = null;
-	public PreparedStatement psReadSubj = null;
-	public PreparedStatement psUpdSubj = null;
-	public PreparedStatement psDelSubj = null;
-	public PreparedStatement psGetAllSubj = null;
-	public ResultSet rsReadSubj = null;
-	public ResultSet rsGetAllSubj = null;
+	private PreparedStatement psCreateSubj = null;
+	private PreparedStatement psReadSubj = null;
+	private PreparedStatement psUpdSubj = null;
+	private PreparedStatement psDelSubj = null;
+	private PreparedStatement psGetAllSubj = null;
+	private ResultSet rsReadSubj = null;
+	private ResultSet rsGetAllSubj = null;
 	
 	// Constructor
 	public MySqlSubjectDao(Connection connection) throws DaoException {

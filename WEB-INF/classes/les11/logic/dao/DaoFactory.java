@@ -21,5 +21,5 @@ public interface DaoFactory {
 	public MarkDao getMarkDao () throws DaoException;
 	
 	// Closes Connection instance object
-	public void close() throws SQLException;
+	public void close() throws DaoException;
 }

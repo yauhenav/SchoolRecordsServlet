@@ -10,22 +10,22 @@ import les11.logic.exception.*;
 
 public class MySqlMarkDao implements MarkDao {
     private Connection connection;
-	public final static String SQL_CREATE = "INSERT INTO daotrain.MARK (ID, VALUE, STUDENT_ID, SUBJECT_ID) VALUES (?, ?, ?, ?)";
-	public final static String SQL_READ = "SELECT ID, VALUE, STUDENT_ID, SUBJECT_ID FROM daotrain.MARK WHERE ID = ?";
-	public final static String SQL_UPDATE = "UPDATE daotrain.MARK SET VALUE = ?, STUDENT_ID = ?, SUBJECT_ID = ? WHERE ID = ?";
-	public final static String SQL_DELETE = "DELETE FROM daotrain.MARK WHERE ID = ?";
-	public final static String SQL_GETALL = "SELECT ID, VALUE, STUDENT_ID, SUBJECT_ID FROM daotrain.MARK";	
-	public final static String SQL_GETALL_ONE_STUDENT = "SELECT ID, VALUE, STUDENT_ID, SUBJECT_ID FROM daotrain.MARK WHERE STUDENT_ID = ?";
+	private final static String SQL_CREATE = "INSERT INTO daotrain.MARK (ID, VALUE, STUDENT_ID, SUBJECT_ID) VALUES (?, ?, ?, ?)";
+	private final static String SQL_READ = "SELECT ID, VALUE, STUDENT_ID, SUBJECT_ID FROM daotrain.MARK WHERE ID = ?";
+	private final static String SQL_UPDATE = "UPDATE daotrain.MARK SET VALUE = ?, STUDENT_ID = ?, SUBJECT_ID = ? WHERE ID = ?";
+	private final static String SQL_DELETE = "DELETE FROM daotrain.MARK WHERE ID = ?";
+	private final static String SQL_GETALL = "SELECT ID, VALUE, STUDENT_ID, SUBJECT_ID FROM daotrain.MARK";	
+	private final static String SQL_GETALL_ONE_STUDENT = "SELECT ID, VALUE, STUDENT_ID, SUBJECT_ID FROM daotrain.MARK WHERE STUDENT_ID = ?";
 	
-	public PreparedStatement psCreateMark = null;
-	public PreparedStatement psReadMark = null;
-	public PreparedStatement psUpdMark = null;
-	public PreparedStatement psDelMark = null;
-	public PreparedStatement psGetAllMark = null;
-	public PreparedStatement psGetAllMarkOneStud = null;
-	public ResultSet rsReadMark = null;
-	public ResultSet rsGetAllMark = null;
-	public ResultSet rsGetAllMarkOneStud = null;
+	private PreparedStatement psCreateMark = null;
+	private PreparedStatement psReadMark = null;
+	private PreparedStatement psUpdMark = null;
+	private PreparedStatement psDelMark = null;
+	private PreparedStatement psGetAllMark = null;
+	private PreparedStatement psGetAllMarkOneStud = null;
+	private ResultSet rsReadMark = null;
+	private ResultSet rsGetAllMark = null;
+	private ResultSet rsGetAllMarkOneStud = null;
 	
 	// Constructor
 	public MySqlMarkDao(Connection connection) throws DaoException {

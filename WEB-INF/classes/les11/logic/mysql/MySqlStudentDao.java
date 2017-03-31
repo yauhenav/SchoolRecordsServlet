@@ -10,19 +10,19 @@ import les11.logic.exception.*;
 
 public class MySqlStudentDao implements StudentDao {
     private Connection connection;
-	public final static String SQL_CREATE = "INSERT INTO daotrain.STUDENT (ID, NAME, SURNAME) VALUES (?, ?, ?)";
-	public final static String SQL_READ = "SELECT ID, NAME, SURNAME FROM daotrain.STUDENT WHERE ID = ?";
-	public final static String SQL_UPDATE = "UPDATE daotrain.STUDENT SET NAME = ?, SURNAME = ? WHERE ID = ?";
-	public final static String SQL_DELETE = "DELETE FROM daotrain.STUDENT WHERE ID = ?";
-	public final static String SQL_GETALL = "SELECT ID, NAME, SURNAME FROM daotrain.STUDENT";
+	private final static String SQL_CREATE = "INSERT INTO daotrain.STUDENT (ID, NAME, SURNAME) VALUES (?, ?, ?)";
+	private final static String SQL_READ = "SELECT ID, NAME, SURNAME FROM daotrain.STUDENT WHERE ID = ?";
+	private final static String SQL_UPDATE = "UPDATE daotrain.STUDENT SET NAME = ?, SURNAME = ? WHERE ID = ?";
+	private final static String SQL_DELETE = "DELETE FROM daotrain.STUDENT WHERE ID = ?";
+	private final static String SQL_GETALL = "SELECT ID, NAME, SURNAME FROM daotrain.STUDENT";
 	
-	public PreparedStatement psCreateStud = null;
-	public PreparedStatement psReadStud = null;
-	public PreparedStatement psUpdStud = null;
-	public PreparedStatement psDelStud = null;
-	public PreparedStatement psGetAllStud = null;
-	public ResultSet rsReadStud = null;
-	public ResultSet rsGetAllStud = null;
+	private PreparedStatement psCreateStud = null;
+	private PreparedStatement psReadStud = null;
+	private PreparedStatement psUpdStud = null;
+	private PreparedStatement psDelStud = null;
+	private PreparedStatement psGetAllStud = null;
+	private ResultSet rsReadStud = null;
+	private ResultSet rsGetAllStud = null;
 	
 	// Constructor
 	public MySqlStudentDao(Connection connection) throws DaoException {
