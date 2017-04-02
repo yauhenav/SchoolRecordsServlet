@@ -135,6 +135,10 @@ public class daoAppServlet extends HttpServlet {
 				pw.println("</tr>");
 				pw.println("</table>");
 			}
+			else if (req.getParameter("close_everything") != null) {
+				pw.println("<B>All prepared statements and connections are closed</B>");
+				mngob.closeEverything();
+			}
 			
 			
 			

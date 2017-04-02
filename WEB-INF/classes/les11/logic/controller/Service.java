@@ -101,7 +101,33 @@ public class Service {
 		return dummyMar1;
 	}
 	
-	
+	// Close all prepared statements and connections
+	public void closeEverything() {
+		try {
+			if (interDaoStud != null) {
+				interDaoStud.close();
+			} else {
+				System.err.println("MySqlStudentDao object was not created");
+			}
+			if (interDaoSub != null) {
+				interDaoSub.close();
+			} else {
+				System.err.println("MySqlSubjectDao object was not created");
+			}
+			if (interDaoMar != null) {
+				interDaoMar.close();
+			} else {
+				System.err.println("MySqlMarkDao object was not created");
+			}
+			if (interDaoFact != null) {
+				interDaoFact.close();
+			} else {
+				System.err.println("MySqlDaoFactory object was not created");
+			} 
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+	}
 }
 /* 			
 		
