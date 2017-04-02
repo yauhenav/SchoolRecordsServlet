@@ -130,64 +130,65 @@ public class MySqlSubjectDao implements SubjectDao {
 	}
 	
 	// Terminates the connection and all 'PreparedStatement's
-	public void close() throws DaoException {
-		try {
-			if (psCreateSubj != null) {
+	public void close() throws DaoException {		
+		if (psCreateSubj != null) {
+			try {
 				psCreateSubj.close();
-				throw new DaoException("error in psCreateSubj.close()");
-				} else {
-					System.err.println ("PS statement was not created");
-				}
-				} catch (DaoException e) {		
-					System.err.println ("this error caught in psCreateSub.close() line");
-					e.printStackTrace();
-				} catch (SQLException exc) {
-				exc.printStackTrace();
+			} catch (SQLException exc) {
+				throw new DaoException("Exception for DAO");
 			}
-		try {
-			if (psReadSubj != null) {
+		} else {
+			System.err.println ("PS statement was not created");
+		}
+		
+		if (psReadSubj != null) {
+			try {
 				psReadSubj.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
 			} catch (SQLException exc) {
-				throw new DaoException ("Exception for DAQ");
+				throw new DaoException("Exception for DAO");
 			}
-		try {
-			if (psUpdSubj != null) {
+		} else {
+			System.err.println ("PS statement was not created");
+		}		
+		
+		if (psUpdSubj != null) {
+			try {
 				psUpdSubj.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
 			} catch (SQLException exc) {
-				throw new DaoException ("Exception for DAQ");
+				throw new DaoException("Exception for DAO");
 			}
-		try {
-			if (psDelSubj != null) {
+		} else {
+			System.err.println ("PS statement was not created");
+		}
+		
+		if (psDelSubj != null) {
+			try {
 				psDelSubj.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
 			} catch (SQLException exc) {
-				throw new DaoException ("Exception for DAQ");
+				throw new DaoException("Exception for DAO");
 			}
-		try {
-			if (psGetAllSubj != null) {
+		} else {
+			System.err.println ("PS statement was not created");
+		}
+		
+		if (psGetAllSubj != null) {
+			try {
 				psGetAllSubj.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
 			} catch (SQLException exc) {
-				throw new DaoException ("Exception for DAQ");
+				throw new DaoException("Exception for DAO");
 			}
-		try {
-			if (connection != null) {
+		} else {
+			System.err.println ("PS statement was not created");
+		}
+		
+		if (connection != null) {
+			try {
 				connection.close();
-				} else {
-					System.err.println ("Connection was not established");
-				}
 			} catch (SQLException exc) {
 				throw new DaoException ("Exception for DAO");
 			}
+		} else {
+			System.err.println ("Connection was not established");
+		}
 	}
 }
