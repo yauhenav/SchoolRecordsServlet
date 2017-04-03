@@ -132,17 +132,17 @@ public class MySqlSubjectDao implements SubjectDao {
 	// Terminates the connection and all 'PreparedStatement's
 	public void close() throws DaoException {		
 		if (psCreateSubj != null) {
-			
 			try {
 				try {
-				psCreateSubj.close();
-			} catch (SQLException exc) {
-				throw new DaoException("Exception for DAO");
+					psCreateSubj.close();
+					//throw new SQLException(); // Uncomment this line to test exception handling
+				} catch (SQLException exc) {
+					throw new DaoException("Exception for DAO");
 				}
 			} catch (DaoException exc) {
+				System.err.println("The error below was caught while closing psCreateSubj");
 				exc.printStackTrace();
-			}
-		
+			}		
 		} else {
 			System.err.println ("PS statement was not created");
 		}
@@ -150,43 +150,62 @@ public class MySqlSubjectDao implements SubjectDao {
 		if (psReadSubj != null) {
 			try {
 				try {
-				psReadSubj.close();
-			} catch (SQLException exc) {
-				throw new DaoException("Exception for DAO");
-			}
+					psReadSubj.close();
+					//throw new SQLException(); // Uncomment this line to test exception handling
+				} catch (SQLException exc) {
+					throw new DaoException("Exception for DAO");
+				}
 			}catch (DaoException exc) {
+				System.err.println("The error below was caught while closing psReadSubj");
 				exc.printStackTrace();
-			}
-		
+			}		
 		} else {
 			System.err.println ("PS statement was not created");
 		}		
 		
 		if (psUpdSubj != null) {
 			try {
-				psUpdSubj.close();
-			} catch (SQLException exc) {
-				throw new DaoException("Exception for DAO");
-			}
+				try {
+					psUpdSubj.close();
+					//throw new SQLException(); // Uncomment this line to test exception handling
+				} catch (SQLException exc) {
+					throw new DaoException("Exception for DAO");
+				}
+			} catch (DaoException exc) {
+				System.err.println("The error below was caught while closing psUpdSubj");
+				exc.printStackTrace();
+			}			
 		} else {
 			System.err.println ("PS statement was not created");
 		}
 		
 		if (psDelSubj != null) {
 			try {
-				psDelSubj.close();
-			} catch (SQLException exc) {
-				throw new DaoException("Exception for DAO");
-			}
+				try {
+					psDelSubj.close();
+					//throw new SQLException(); // Uncomment this line to test exception handling
+				} catch (SQLException exc) {
+					throw new DaoException("Exception for DAO");
+				}
+			} catch (DaoException exc) {
+				System.err.println("The error below was caught while closing psDelSubj");
+				exc.printStackTrace();
+			}				
 		} else {
 			System.err.println ("PS statement was not created");
 		}
 		
 		if (psGetAllSubj != null) {
 			try {
-				psGetAllSubj.close();
-			} catch (SQLException exc) {
-				throw new DaoException("Exception for DAO");
+				try {
+					psGetAllSubj.close();
+					//throw new SQLException(); // Uncomment this line to test exception handling
+				} catch (SQLException exc) {
+					throw new DaoException("Exception for DAO");
+				}
+			} catch (DaoException exc) {
+				System.err.println("The error below was caught while closing psGetAllSubj");
+				exc.printStackTrace();
 			}
 		} else {
 			System.err.println ("PS statement was not created");
@@ -194,9 +213,15 @@ public class MySqlSubjectDao implements SubjectDao {
 		
 		if (connection != null) {
 			try {
-				connection.close();
-			} catch (SQLException exc) {
-				throw new DaoException ("Exception for DAO");
+				try {
+					connection.close();
+					//throw new SQLException(); // Uncomment this line to test exception handling
+				} catch (SQLException exc) {
+					throw new DaoException ("Exception for DAO");
+				}
+			} catch (DaoException exc) {
+				System.err.println("The error below was caught while closing connection");
+				exc.printStackTrace();
 			}
 		} else {
 			System.err.println ("Connection was not established");
