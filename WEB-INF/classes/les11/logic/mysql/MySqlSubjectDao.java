@@ -133,7 +133,14 @@ public class MySqlSubjectDao implements SubjectDao {
 	public void close() throws DaoException {		
 		if (psCreateSubj != null) {
 			try {
+				
 				psCreateSubj.close();
+				throw new DaoException ("exception in subj");
+			} catch (DaoException e) {
+				System.out.println("error caught in subj");
+				e.printStackTrace();
+				e.toString();
+			
 			} catch (SQLException exc) {
 				throw new DaoException("Exception for DAO");
 			}
@@ -144,6 +151,12 @@ public class MySqlSubjectDao implements SubjectDao {
 		if (psReadSubj != null) {
 			try {
 				psReadSubj.close();
+				throw new DaoException ("exception in subj");
+			} catch (DaoException e) {
+				System.out.println("error caught in subj");
+				e.printStackTrace();
+				e.toString();
+			
 			} catch (SQLException exc) {
 				throw new DaoException("Exception for DAO");
 			}
