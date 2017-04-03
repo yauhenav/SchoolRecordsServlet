@@ -132,34 +132,32 @@ public class MySqlSubjectDao implements SubjectDao {
 	// Terminates the connection and all 'PreparedStatement's
 	public void close() throws DaoException {		
 		if (psCreateSubj != null) {
-			try {
-				
-				psCreateSubj.close();
-				throw new DaoException ("exception in subj");
-			} catch (DaoException e) {
-				System.out.println("error caught in subj");
-				e.printStackTrace();
-				e.toString();
 			
+			try {
+				try {
+				psCreateSubj.close();
 			} catch (SQLException exc) {
 				throw new DaoException("Exception for DAO");
+				}
+			} catch (DaoException exc) {
+				exc.printStackTrace();
 			}
+		
 		} else {
 			System.err.println ("PS statement was not created");
 		}
 		
 		if (psReadSubj != null) {
 			try {
+				try {
 				psReadSubj.close();
-				throw new DaoException ("exception in subj");
-			} catch (DaoException e) {
-				System.out.println("error caught in subj");
-				e.printStackTrace();
-				e.toString();
-			
 			} catch (SQLException exc) {
 				throw new DaoException("Exception for DAO");
 			}
+			}catch (DaoException exc) {
+				exc.printStackTrace();
+			}
+		
 		} else {
 			System.err.println ("PS statement was not created");
 		}		
