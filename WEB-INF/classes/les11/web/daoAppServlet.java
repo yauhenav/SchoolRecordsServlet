@@ -135,6 +135,70 @@ public class daoAppServlet extends HttpServlet {
 				pw.println("</tr>");
 				pw.println("</table>");
 			}
+			else if (req.getParameter("show_all_marks") != null) {
+				pw.println("<B>Here's a list of all marks in the DB</B>");
+				pw.println("<table border=1>");
+				List<Mark> lst = mngob.displayAllMarks();
+				Iterator<Mark> itrmar0 = lst.iterator();
+				while (itrmar0.hasNext()) {
+					pw.println("<tr>");
+					Mark element = itrmar0.next();
+					pw.println("<td>" + element.toString() + "</td>");
+					pw.println("</tr>");
+				}
+			}
+			
+			else if (req.getParameter("show_all_marks_1stud") != null) {
+				pw.println("<B>Here's a list of all marks of one specified student</B>");
+				pw.println("<table border=1>");				
+				String paramVal = req.getParameter("show_all_marks_1stud");
+				int key = Integer.parseInt(paramVal);
+				List<Mark> lst1 = mngob.displayMarksOneStud(key);
+				Iterator<Mark> itrmar1 = lst1.iterator();
+				while (itrmar1.hasNext()) {
+					pw.println("<tr>");
+					Mark element = itrmar1.next();
+					pw.println("<td>" + element.toString() + "</td>");
+					pw.println("</tr>");
+				}
+			}
+			
+			else if (req.getParameter("new_mark_ID") != null) {
+				pw.println("<B>Addition of new mark</B>");
+				pw.println("Go to home page and press button in Show all marks section to check if mark was added");
+				String idValue = req.getParameter("new_mark_ID");
+				int id = Integer.parseInt(idValue);
+				String valueValue = req.getParameter("new_mark_value");
+				int value = Integer.parseInt(valueValue);
+				String studentIdValue = req.getParameter("new_mark_studentId");
+				int studentId = Integer.parseInt(studentIdValue);
+				String subjectIdValue = req.getParameter("new_mark_subjectId");
+				int subjectId = Integer.parseInt(subjectIdValue);
+				mngob.addMark (id, value, studentId, subjectId);				
+			}
+			
+			else if (req.getParameter("update_mark_ID") != null) {
+				pw.println("<B>Update of a mark</B>");
+				pw.println("Go to home page and press button in Show all marks section to check if mark was updated");
+				String idValue = req.getParameter("update_mark_ID");
+				int id = Integer.parseInt(idValue);
+				String valueValue = req.getParameter("update_mark_value");
+				int value = Integer.parseInt(valueValue);
+				String studentIdValue = req.getParameter("update_mark_studentId");
+				int studentId = Integer.parseInt(studentIdValue);
+				String subjectIdValue = req.getParameter("update_mark_subjectId");
+				int subjectId = Integer.parseInt(subjectIdValue);
+				mngob.updateMark (id, value, studentId, subjectId);				
+			}
+			
+			else if(req.getParameter("delete_mark_ID") != null) {
+				pw.println("<B>Deletion of existing mark</B>");
+				pw.println("Go to home page and press button in Show all marks section to check if mark was deleted");
+				String idValue = req.getParameter("delete_mark_ID");
+				int id = Integer.parseInt(idValue);
+				mngob.deleteMark(id);
+			}
+			
 			else if (req.getParameter("close_everything") != null) {
 				pw.println("<B>All prepared statements and connections are closed</B>");
 				mngob.closeEverything();

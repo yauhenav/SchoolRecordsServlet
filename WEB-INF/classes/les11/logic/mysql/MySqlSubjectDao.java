@@ -136,7 +136,7 @@ public class MySqlSubjectDao implements SubjectDao {
 		if (this.dummyPs != null) {
 			try {
 				this.dummyPs.close();
-				throw new SQLException(); // Uncomment this line to test exception handling
+				//throw new SQLException(); // Uncomment this line to test exception handling
 			} catch (SQLException exc) {
 				throw new DaoException("Exception for Dao");
 			}
@@ -144,8 +144,7 @@ public class MySqlSubjectDao implements SubjectDao {
 			System.err.println ("PS statement was not created");
 		}
 	}
-	
-	
+		
 	// Terminates all 'PreparedStatement's
 	public void close() {
 		try {

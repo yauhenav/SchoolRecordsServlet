@@ -21,6 +21,7 @@ public class MySqlStudentDao implements StudentDao {
 	private PreparedStatement psUpdStud = null;
 	private PreparedStatement psDelStud = null;
 	private PreparedStatement psGetAllStud = null;
+	private PreparedStatement dummyPs = null;
 	private ResultSet rsReadStud = null;
 	private ResultSet rsGetAllStud = null;
 	
@@ -133,41 +134,48 @@ public class MySqlStudentDao implements StudentDao {
 		}
 	}
 	
-	// Terminates the connection and all 'PreparedStatement's
-	public void close() throws DaoException {
+	// Terminates 'PreparedStatement' received as an argument
+	private void closePs(PreparedStatement dummyPs) throws DaoException {
+		this.dummyPs = dummyPs;
+		if (this.dummyPs != null) {
+			try {
+				this.dummyPs.close();
+				//throw new SQLException(); // Uncomment this line to test exception handling
+			} catch (SQLException exc) {
+				throw new DaoException("Exception for Dao");
+			}
+		} else {
+			System.err.println ("PS statement was not created");
+		}
+	}
+	
+	// Terminates all 'PreparedStatement's
+	public void close() {
 		try {
-			if (psCreateStud != null) {
-				psCreateStud.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
-			if (psReadStud != null) {
-				psReadStud.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
-			if (psUpdStud != null) {
-				psUpdStud.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
-			if (psDelStud != null) {
-				psDelStud.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
-			if (psGetAllStud != null) {
-				psGetAllStud.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
-			if (connection != null) {
-				connection.close();
-				} else {
-					System.err.println ("Connection was not established");
-				}
-		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			this.closePs(psCreateStud);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psReadStud);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psUpdStud);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psDelStud);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psGetAllStud);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
 		}
 	}
 }
+

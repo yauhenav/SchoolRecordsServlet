@@ -101,6 +101,44 @@ public class Service {
 		return dummyMar1;
 	}
 	
+	// Retrieve and display all marks from the DB
+	public List<Mark> displayAllMarks() throws DaoException {
+		List<Mark> showMarks0 = interDaoMar.getAll();
+		return showMarks0;
+	}
+	
+	// Retrieve and display all subjects with all corresponding marks of one student specified by ID
+	public List<Mark> displayMarksOneStud (int key) throws DaoException {
+		List<Mark> showMarks1Stud = interDaoMar.getAllMarkOneStud(key);
+		return showMarks1Stud;
+	}
+	
+	// Add a new entry into DB as per corresponding received 'Mark' object and display the result
+	public void addMark(int id, int value, int studentId, int subjectId) throws DaoException {
+		Mark dummyMark2 = new Mark();
+		dummyMark2.setId(id);
+		dummyMark2.setValue(value);
+		dummyMark2.setStudentId(studentId);
+		dummyMark2.setSubjectId(subjectId);
+		interDaoMar.create(dummyMark2);
+	}
+	
+	// Update DB entry as per specified 'Mark' object and display the result
+	public void updateMark(int id, int value, int studentId, int subjectId) throws DaoException {
+		Mark dummyMar3 = new Mark();
+		dummyMar3.setId(id);
+		dummyMar3.setValue(value);
+		dummyMar3.setStudentId(studentId);
+		dummyMar3.setSubjectId(subjectId);
+		interDaoMar.update(dummyMar3);
+	}
+	
+	// Delete DB entry as per specified 'Mark' object and display the result
+	public void deleteMark(int id) throws DaoException {
+		interDaoMar.delete (id);		
+	}	
+		
+	
 	// Close all prepared statements and connections
 	public void closeEverything() {
 		try {
@@ -131,63 +169,12 @@ public class Service {
 }
 /* 			
 		
-			// Retrieve and display all subjects with all corresponding marks of one student specified by ID
-			List<Mark> showMarksOneStud = interDaoMar.getAllMarkOneStud(4);
-			System.out.println ("Here goes a list of all marks of one student");
-			Iterator<Mark> itrmar1 = showMarksOneStud.iterator();
-			while (itrmar1.hasNext()) {
-				Mark element = itrmar1.next();
-				System.out.println (element);
-			}
-		
-		
-		// Retrieve and display all marks from the DB
-			interDaoMar = interDaoFact.getMarkDao();
-			List<Mark> showAllMarks = interDaoMar.getAll();
-			System.out.println ("Here goes a list of all marks of all students for all subjects");
-			Iterator<Mark> itrmar0 = showAllMarks.iterator();
-			while (itrmar0.hasNext()) {
-				Mark element = itrmar0.next();
-				System.out.println (element);
-			}
-		
-		// Retrieve and display mark as per specified ID
-			System.out.println("Here goes a mark selected by Mark's ID");
-			Mark dummyMar1 = interDaoMar.read(21);
-			System.out.println(dummyMar1.toString());
-
-		// Add a new entry into DB as per corresponding received 'Mark' object and display the result
-			System.out.println("Here goes demonstration of a Mark addition");
-			Mark dummyMar2 = new Mark();
-			dummyMar2.setId(61);
-			dummyMar2.setValue(6);
-			dummyMar2.setStudentId(10);
-			dummyMar2.setSubjectId(4);
-			interDaoMar.create(dummyMar2);
-			List<Mark> showAllMarks2 = interDaoMar.getAll();
-			System.out.println ("Here goes a list of all marks of all students for all subjects after addition");
-			Iterator<Mark> itrmar2 = showAllMarks2.iterator();
-			while (itrmar2.hasNext()) {
-				Mark element = itrmar2.next();
-				System.out.println (element);
-			}
-		
-		// Update DB entry as per specified 'Mark' object and display the result
-			System.out.println ("Here goes demonstration of a Mark update");
-			Mark dummyMar3 = new Mark();
-			dummyMar3.setId(61);
-			dummyMar3.setValue(8);
-			dummyMar3.setStudentId(9);
-			dummyMar3.setSubjectId(5);
-			interDaoMar.update(dummyMar3);
-			List<Mark> showAllMarks3 = interDaoMar.getAll();
-			System.out.println ("Here goes a list of all marks of all students for all subjects after update");
-			Iterator<Mark> itrmar3 = showAllMarks3.iterator();
-			while (itrmar3.hasNext()) {
-				Mark element = itrmar3.next();
-				System.out.println (element);
-			}
 			
+		
+	
+		
+		
+	
 		// Delete DB entry as per specified 'Mark' object and display the result
 			System.out.println("Here goes demonstration of a Mark deletion");
 			interDaoMar.delete(61);

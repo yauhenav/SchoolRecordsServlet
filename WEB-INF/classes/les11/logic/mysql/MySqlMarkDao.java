@@ -23,6 +23,7 @@ public class MySqlMarkDao implements MarkDao {
 	private PreparedStatement psDelMark = null;
 	private PreparedStatement psGetAllMark = null;
 	private PreparedStatement psGetAllMarkOneStud = null;
+	private PreparedStatement dummyPs = null;
 	private ResultSet rsReadMark = null;
 	private ResultSet rsGetAllMark = null;
 	private ResultSet rsGetAllMarkOneStud = null;
@@ -173,46 +174,53 @@ public class MySqlMarkDao implements MarkDao {
 		}
 	}
 	
-	// Terminates the connection and all 'PreparedStatement's
-	public void close() throws DaoException {
+	// Terminates 'PreparedStatement' received as an argument
+	private void closePs(PreparedStatement dummyPs) throws DaoException {
+		this.dummyPs = dummyPs;
+		if (this.dummyPs != null) {
+			try {
+				this.dummyPs.close();
+				//throw new SQLException(); // Uncomment this line to test exception handling
+			} catch (SQLException exc) {
+				throw new DaoException("Exception for Dao");
+			}
+		} else {
+			System.err.println ("PS statement was not created");
+		}
+	}
+	
+	// Terminates all 'PreparedStatement's
+	public void close() {
 		try {
-			if (psCreateMark != null) {
-				psCreateMark.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
-			if (psReadMark != null) {
-				psReadMark.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
-			if (psUpdMark != null) {
-				psUpdMark.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
-			if (psDelMark != null) {
-				psDelMark.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
-			if (psGetAllMark != null) {
-				psGetAllMark.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
-			if (psGetAllMarkOneStud != null) {
-				psGetAllMarkOneStud.close();
-				} else {
-					System.err.println ("PS statement was not created");
-				}
-			if (connection != null) {
-				connection.close();
-				} else {
-					System.err.println ("Connection was not established");
-				}
-		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			this.closePs(psCreateMark);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psReadMark);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psUpdMark);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psDelMark);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psGetAllMark);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psGetAllMarkOneStud);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
 		}
 	}
 }
+
