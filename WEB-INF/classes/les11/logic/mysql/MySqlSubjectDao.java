@@ -21,6 +21,7 @@ public class MySqlSubjectDao implements SubjectDao {
 	private PreparedStatement psUpdSubj = null;
 	private PreparedStatement psDelSubj = null;
 	private PreparedStatement psGetAllSubj = null;
+	private PreparedStatement dummyPs = null;
 	private ResultSet rsReadSubj = null;
 	private ResultSet rsGetAllSubj = null;
 	
@@ -129,102 +130,49 @@ public class MySqlSubjectDao implements SubjectDao {
 		}
 	}
 	
-	// Terminates the connection and all 'PreparedStatement's
-	public void close() throws DaoException {		
-		if (psCreateSubj != null) {
+	// Terminates 'PreparedStatement' received as an argument
+	private void closePs(PreparedStatement dummyPs) throws DaoException {
+		this.dummyPs = dummyPs;
+		if (this.dummyPs != null) {
 			try {
-				try {
-					psCreateSubj.close();
-					//throw new SQLException(); // Uncomment this line to test exception handling
-				} catch (SQLException exc) {
-					throw new DaoException("Exception for DAO");
-				}
-			} catch (DaoException exc) {
-				System.err.println("The error below was caught while closing psCreateSubj");
-				exc.printStackTrace();
-			}		
-		} else {
-			System.err.println ("PS statement was not created");
-		}
-		
-		if (psReadSubj != null) {
-			try {
-				try {
-					psReadSubj.close();
-					//throw new SQLException(); // Uncomment this line to test exception handling
-				} catch (SQLException exc) {
-					throw new DaoException("Exception for DAO");
-				}
-			}catch (DaoException exc) {
-				System.err.println("The error below was caught while closing psReadSubj");
-				exc.printStackTrace();
-			}		
-		} else {
-			System.err.println ("PS statement was not created");
-		}		
-		
-		if (psUpdSubj != null) {
-			try {
-				try {
-					psUpdSubj.close();
-					//throw new SQLException(); // Uncomment this line to test exception handling
-				} catch (SQLException exc) {
-					throw new DaoException("Exception for DAO");
-				}
-			} catch (DaoException exc) {
-				System.err.println("The error below was caught while closing psUpdSubj");
-				exc.printStackTrace();
-			}			
-		} else {
-			System.err.println ("PS statement was not created");
-		}
-		
-		if (psDelSubj != null) {
-			try {
-				try {
-					psDelSubj.close();
-					//throw new SQLException(); // Uncomment this line to test exception handling
-				} catch (SQLException exc) {
-					throw new DaoException("Exception for DAO");
-				}
-			} catch (DaoException exc) {
-				System.err.println("The error below was caught while closing psDelSubj");
-				exc.printStackTrace();
-			}				
-		} else {
-			System.err.println ("PS statement was not created");
-		}
-		
-		if (psGetAllSubj != null) {
-			try {
-				try {
-					psGetAllSubj.close();
-					//throw new SQLException(); // Uncomment this line to test exception handling
-				} catch (SQLException exc) {
-					throw new DaoException("Exception for DAO");
-				}
-			} catch (DaoException exc) {
-				System.err.println("The error below was caught while closing psGetAllSubj");
-				exc.printStackTrace();
+				this.dummyPs.close();
+				throw new SQLException(); // Uncomment this line to test exception handling
+			} catch (SQLException exc) {
+				throw new DaoException("Exception for Dao");
 			}
 		} else {
 			System.err.println ("PS statement was not created");
-		}
-		
-		if (connection != null) {
-			try {
-				try {
-					connection.close();
-					//throw new SQLException(); // Uncomment this line to test exception handling
-				} catch (SQLException exc) {
-					throw new DaoException ("Exception for DAO");
-				}
-			} catch (DaoException exc) {
-				System.err.println("The error below was caught while closing connection");
-				exc.printStackTrace();
-			}
-		} else {
-			System.err.println ("Connection was not established");
 		}
 	}
+	
+	
+	// Terminates all 'PreparedStatement's
+	public void close() {
+		try {
+			this.closePs(psCreateSubj);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psReadSubj);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psUpdSubj);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psDelSubj);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}
+		try {
+			this.closePs(psGetAllSubj);
+		} catch (DaoException exc) {
+			exc.printStackTrace();
+		}		
+	}
 }
+

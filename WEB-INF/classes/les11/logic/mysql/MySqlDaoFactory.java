@@ -46,14 +46,14 @@ public class MySqlDaoFactory implements DaoFactory {
 	// Closes Connection instance object
 	@Override
 	public void close() throws DaoException {
-		try {
-			if (connection != null) {
+		if (connection != null) {
+			try {
 				connection.close();
-			} else {
-				System.err.println("Connection was not established");
+			} catch (SQLException exc) {
+				throw new DaoException("Exception for DAO");
 			}
-		} catch (SQLException exc) {
-			throw new DaoException("Exception for DAO");
+		} else {
+			System.err.println("Connection was not established");
 		}
 	}
 }

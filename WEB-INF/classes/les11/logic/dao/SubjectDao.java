@@ -26,5 +26,5 @@ public interface SubjectDao {
 	public List<Subject> getAll() throws DaoException;
 	
 	// Terminates the connection and all 'PreparedStatements
-	public void close() throws DaoException;
+	public void close() /*throws DaoException*/;
 }
