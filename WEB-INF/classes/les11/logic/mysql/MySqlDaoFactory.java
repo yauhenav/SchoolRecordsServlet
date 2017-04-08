@@ -14,33 +14,33 @@ public class MySqlDaoFactory implements DaoFactory {
 	Connection connection = null;
 	
 	// Constructor
-    public MySqlDaoFactory() throws DaoException {
+	public MySqlDaoFactory() throws DaoException {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Properties props = new Properties();
 			InputStream stream = this.getClass().getResourceAsStream("config.properties");
 			props.load(stream);
 			this.connection =  DriverManager.getConnection(props.getProperty("url"), props.getProperty("user"), props.getProperty("password"));
-   	 		} catch (SQLException exc) {
-				throw new DaoException("Exception for DAO");
-			} catch (IOException | ClassNotFoundException exc) {
-				exc.printStackTrace();
-			}
+		} catch (SQLException exc) {
+			throw new DaoException("Exception for DAO");
+		} catch (IOException | ClassNotFoundException exc) {
+			exc.printStackTrace();
 		}
+	}
 	
 	@Override
-    public StudentDao getStudentDao() throws DaoException {
-        return new MySqlStudentDao(connection);
-    }
+	public StudentDao getStudentDao() throws DaoException {
+		return new MySqlStudentDao(connection);
+	}
 
 	@Override
-    public SubjectDao getSubjectDao() throws DaoException {
-        return new MySqlSubjectDao(connection);
-    }
+	public SubjectDao getSubjectDao() throws DaoException {
+		return new MySqlSubjectDao(connection);
+	}
 	
 	@Override
-    public MarkDao getMarkDao() throws DaoException {
-        return new MySqlMarkDao(connection);
+	public MarkDao getMarkDao() throws DaoException {
+		return new MySqlMarkDao(connection);
 	}
 	
 	// Closes Connection instance object

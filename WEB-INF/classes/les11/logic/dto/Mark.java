@@ -8,10 +8,10 @@ import les11.logic.exception.*;
 import les11.logic.mysql.*;
 
 public class Mark {
-	public int id;
-	public int value;
-	public int StudentId;
-	public int SubjectId;
+	private int id;
+	private int value;
+	private int StudentId;
+	private int SubjectId;
 		
 	public int getId() {
 		return id;

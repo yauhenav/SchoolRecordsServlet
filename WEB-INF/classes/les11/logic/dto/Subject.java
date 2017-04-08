@@ -8,8 +8,8 @@ import les11.logic.exception.*;
 import les11.logic.mysql.*;
 
 public class Subject {
-	public int id;
-	public String description;
+	private int id;
+	private String description;
 		
 	public int getId() {
 		return id;

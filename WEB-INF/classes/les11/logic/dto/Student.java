@@ -8,9 +8,9 @@ import les11.logic.exception.*;
 import les11.logic.mysql.*;
 
 public class Student {
-	public int id;
-	public String name;
-	public String surname;
+	private int id;
+	private String name;
+	private String surname;
 	
 	public int getId() {
 		return id;

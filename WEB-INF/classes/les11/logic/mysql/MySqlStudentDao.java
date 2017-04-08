@@ -9,7 +9,7 @@ import les11.logic.dto.*;
 import les11.logic.exception.*;
 
 public class MySqlStudentDao implements StudentDao {
-    private Connection connection;
+	private Connection connection;
 	private final static String SQL_CREATE = "INSERT INTO daotrain.STUDENT (ID, NAME, SURNAME) VALUES (?, ?, ?)";
 	private final static String SQL_READ = "SELECT ID, NAME, SURNAME FROM daotrain.STUDENT WHERE ID = ?";
 	private final static String SQL_UPDATE = "UPDATE daotrain.STUDENT SET NAME = ?, SURNAME = ? WHERE ID = ?";
@@ -28,20 +28,20 @@ public class MySqlStudentDao implements StudentDao {
 	// Constructor
 	public MySqlStudentDao(Connection connection) throws DaoException {
 		try {
-		this.connection = connection;
-		psCreateStud = connection.prepareStatement(SQL_CREATE);
-		psReadStud = connection.prepareStatement(SQL_READ);
-		psUpdStud = connection.prepareStatement(SQL_UPDATE);
-		psDelStud = connection.prepareStatement(SQL_DELETE);
-		psGetAllStud = connection.prepareStatement(SQL_GETALL);
+			this.connection = connection;
+			psCreateStud = connection.prepareStatement(SQL_CREATE);
+			psReadStud = connection.prepareStatement(SQL_READ);
+			psUpdStud = connection.prepareStatement(SQL_UPDATE);
+			psDelStud = connection.prepareStatement(SQL_DELETE);
+			psGetAllStud = connection.prepareStatement(SQL_GETALL);
 		} catch (SQLException exc) {
 			throw new DaoException ("Exception for DAO");
 		}
-    }
+	}
 	
-    // Creates a new DB entry as per corresponding received object
-    @Override 
-    public void create(Student student) throws DaoException {
+	// Creates a new DB entry as per corresponding received object
+	@Override 
+	public void create(Student student) throws DaoException {
 		try {
 			psCreateStud.setInt(1, student.getId());
 			psCreateStud.setString(2, student.getName());
@@ -51,10 +51,10 @@ public class MySqlStudentDao implements StudentDao {
 			throw new DaoException ("Exception for DAO");
 		} 
 	}
-    
-    // Returns the object corresponding to the DB entry with received primary 'key'
+
+	// Returns the object corresponding to the DB entry with received primary 'key'
 	@Override 
-    public Student read(int key) throws DaoException {
+	public Student read(int key) throws DaoException {
 		try {
 			psReadStud.setInt(1, key);
 			rsReadStud = psReadStud.executeQuery();
@@ -80,9 +80,9 @@ public class MySqlStudentDao implements StudentDao {
 		}
 	}	
 	
-    // Modifies the DB entry as per corresponding received object
+	// Modifies the DB entry as per corresponding received object
 	@Override 
-    public void update(Student student) throws DaoException {
+	public void update(Student student) throws DaoException {
 		try {
 			psUpdStud.setString(1, student.getName());
 			psUpdStud.setString(2, student.getSurname());
@@ -93,20 +93,20 @@ public class MySqlStudentDao implements StudentDao {
 		} 
 	}
 
-    // Removes the DB entry as per corresponding received object
-    @Override 
-    public void delete(int key) throws DaoException {
+	// Removes the DB entry as per corresponding received object
+	@Override 
+	public void delete(int key) throws DaoException {
 		try {
 			psDelStud.setInt (1, key);
 			psDelStud.execute();
 		} catch (SQLException exc) {
 			throw new DaoException ("Exception for DAO");
-		} 
+		}
 	}
 
-    // Returns a list of objects corresponding to all DB entries
-    @Override
-    public List<Student> getAll() throws DaoException {
+	// Returns a list of objects corresponding to all DB entries
+	@Override
+	public List<Student> getAll() throws DaoException {
 		try {
 			rsGetAllStud = psGetAllStud.executeQuery();        
 			List<Student> list = new ArrayList<Student>();
@@ -150,6 +150,7 @@ public class MySqlStudentDao implements StudentDao {
 	}
 	
 	// Terminates all 'PreparedStatement's
+	@Override
 	public void close() {
 		try {
 			this.closePs(psCreateStud);
