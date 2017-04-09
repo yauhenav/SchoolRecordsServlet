@@ -21,7 +21,6 @@ public class MySqlStudentDao implements StudentDao {
 	private PreparedStatement psUpdStud = null;
 	private PreparedStatement psDelStud = null;
 	private PreparedStatement psGetAllStud = null;
-	private PreparedStatement dummyPs = null;
 	private ResultSet rsReadStud = null;
 	private ResultSet rsGetAllStud = null;
 	
@@ -39,7 +38,7 @@ public class MySqlStudentDao implements StudentDao {
 		}
 	}
 	
-	// Creates a new DB entry as per corresponding received object
+	// Create a new DB entry as per corresponding received object
 	@Override 
 	public void create(Student student) throws DaoException {
 		try {
@@ -52,7 +51,7 @@ public class MySqlStudentDao implements StudentDao {
 		} 
 	}
 
-	// Returns the object corresponding to the DB entry with received primary 'key'
+	// Return the object corresponding to the DB entry with received primary 'key'
 	@Override 
 	public Student read(int key) throws DaoException {
 		try {
@@ -80,7 +79,7 @@ public class MySqlStudentDao implements StudentDao {
 		}
 	}	
 	
-	// Modifies the DB entry as per corresponding received object
+	// Modify the DB entry as per corresponding received object
 	@Override 
 	public void update(Student student) throws DaoException {
 		try {
@@ -93,7 +92,7 @@ public class MySqlStudentDao implements StudentDao {
 		} 
 	}
 
-	// Removes the DB entry as per corresponding received object
+	// Remove the DB entry as per corresponding received object
 	@Override 
 	public void delete(int key) throws DaoException {
 		try {
@@ -104,7 +103,7 @@ public class MySqlStudentDao implements StudentDao {
 		}
 	}
 
-	// Returns a list of objects corresponding to all DB entries
+	// Return a list of objects corresponding to all DB entries
 	@Override
 	public List<Student> getAll() throws DaoException {
 		try {
@@ -134,12 +133,11 @@ public class MySqlStudentDao implements StudentDao {
 		}
 	}
 	
-	// Terminates 'PreparedStatement' received as an argument
+	// Terminate 'PreparedStatement' object received as an argument
 	private void closePs(PreparedStatement dummyPs) throws DaoException {
-		this.dummyPs = dummyPs;
-		if (this.dummyPs != null) {
+		if (dummyPs != null) {
 			try {
-				this.dummyPs.close();
+				dummyPs.close();
 				//throw new SQLException(); // Uncomment this line to test exception handling
 			} catch (SQLException exc) {
 				throw new DaoException("Exception for Dao");
@@ -149,7 +147,7 @@ public class MySqlStudentDao implements StudentDao {
 		}
 	}
 	
-	// Terminates all 'PreparedStatement's
+	// Terminate all 'PreparedStatement' objects
 	@Override
 	public void close() {
 		try {

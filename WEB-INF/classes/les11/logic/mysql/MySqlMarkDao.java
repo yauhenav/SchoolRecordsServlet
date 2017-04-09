@@ -9,7 +9,7 @@ import les11.logic.dto.*;
 import les11.logic.exception.*;
 
 public class MySqlMarkDao implements MarkDao {
-    private Connection connection;
+	private Connection connection;
 	private final static String SQL_CREATE = "INSERT INTO daotrain.MARK (ID, VALUE, STUDENT_ID, SUBJECT_ID) VALUES (?, ?, ?, ?)";
 	private final static String SQL_READ = "SELECT ID, VALUE, STUDENT_ID, SUBJECT_ID FROM daotrain.MARK WHERE ID = ?";
 	private final static String SQL_UPDATE = "UPDATE daotrain.MARK SET VALUE = ?, STUDENT_ID = ?, SUBJECT_ID = ? WHERE ID = ?";
@@ -23,7 +23,6 @@ public class MySqlMarkDao implements MarkDao {
 	private PreparedStatement psDelMark = null;
 	private PreparedStatement psGetAllMark = null;
 	private PreparedStatement psGetAllMarkOneStud = null;
-	private PreparedStatement dummyPs = null;
 	private ResultSet rsReadMark = null;
 	private ResultSet rsGetAllMark = null;
 	private ResultSet rsGetAllMarkOneStud = null;
@@ -43,9 +42,9 @@ public class MySqlMarkDao implements MarkDao {
 		}
 	}
 	
-    // Creates a new DB entry as per corresponding received object
+	// Create a new DB entry as per corresponding received object
 	@Override
-    public void create(Mark mark) throws DaoException {
+	public void create(Mark mark) throws DaoException {
 		try {
 			psCreateMark.setInt(1, mark.getId());
 			psCreateMark.setInt(2, mark.getValue());
@@ -57,9 +56,9 @@ public class MySqlMarkDao implements MarkDao {
 		} 
 	}
 	
-    // Returns the object corresponding to the DB entry with received primary 'key'
-    @Override
-    public Mark read(int key) throws DaoException {
+	// Return the object corresponding to the DB entry with received primary 'key'
+	@Override
+	public Mark read(int key) throws DaoException {
 		try {
 			psReadMark.setInt(1, key);
 			rsReadMark = psReadMark.executeQuery();
@@ -86,9 +85,9 @@ public class MySqlMarkDao implements MarkDao {
 		}
 	}	
 	
-    // Modifies the DB entry as per corresponding received object
-    @Override
-    public void update(Mark mark) throws DaoException {
+	// Modify the DB entry as per corresponding received object
+	@Override
+	public void update(Mark mark) throws DaoException {
 		try {
 			psUpdMark.setInt(1, mark.getValue());
 			psUpdMark.setInt(2, mark.getStudentId());
@@ -100,9 +99,9 @@ public class MySqlMarkDao implements MarkDao {
 		} 
 	}
 
-    // Removes the DB entry as per corresponding received object
-    @Override
-    public void delete(int key) throws DaoException {
+	// Remove the DB entry as per corresponding received object
+	@Override
+	public void delete(int key) throws DaoException {
 		try {
 			psDelMark.setInt(1, key);
 			psDelMark.execute();
@@ -111,9 +110,9 @@ public class MySqlMarkDao implements MarkDao {
 		} 
 	}
 
-    // Returns a list of objects corresponding to all DB entries
-    @Override
-    public List<Mark> getAll() throws DaoException {
+	// Return a list of objects corresponding to all DB entries
+	@Override
+	public List<Mark> getAll() throws DaoException {
 		try {
 			rsGetAllMark = psGetAllMark.executeQuery();
 			List<Mark> list0 = new ArrayList<Mark>();
@@ -142,7 +141,7 @@ public class MySqlMarkDao implements MarkDao {
 		}
 	}
 		
-	// Returns a list of Marks of one Student as per received primary 'key'
+	// Return a list of Marks of one Student as per received primary 'key'
 	@Override
 	public List<Mark> getAllMarkOneStud (int key) throws DaoException {
 		try {
@@ -174,12 +173,11 @@ public class MySqlMarkDao implements MarkDao {
 		}
 	}
 	
-	// Terminates 'PreparedStatement' received as an argument
+	// Terminate 'PreparedStatement' object received as an argument
 	private void closePs(PreparedStatement dummyPs) throws DaoException {
-		this.dummyPs = dummyPs;
-		if (this.dummyPs != null) {
+		if (dummyPs != null) {
 			try {
-				this.dummyPs.close();
+				dummyPs.close();
 				//throw new SQLException(); // Uncomment this line to test exception handling
 			} catch (SQLException exc) {
 				throw new DaoException("Exception for Dao");
@@ -189,7 +187,7 @@ public class MySqlMarkDao implements MarkDao {
 		}
 	}
 	
-	// Terminates all 'PreparedStatement's
+	// Terminate all 'PreparedStatement' objects
 	public void close() {
 		try {
 			this.closePs(psCreateMark);
@@ -223,4 +221,3 @@ public class MySqlMarkDao implements MarkDao {
 		}
 	}
 }
-

@@ -9,7 +9,7 @@ import les11.logic.dto.*;
 import les11.logic.exception.*;
 
 public class MySqlSubjectDao implements SubjectDao {
-    private Connection connection;
+	private Connection connection;
 	private final static String SQL_CREATE = "INSERT INTO daotrain.SUBJECT (ID, DESCRIPTION) VALUES (?, ?)";
 	private final static String SQL_READ = "SELECT ID, DESCRIPTION FROM daotrain.SUBJECT WHERE ID = ?";
 	private final static String SQL_UPDATE = "UPDATE daotrain.SUBJECT SET DESCRIPTION = ? WHERE ID = ?";
@@ -21,13 +21,12 @@ public class MySqlSubjectDao implements SubjectDao {
 	private PreparedStatement psUpdSubj = null;
 	private PreparedStatement psDelSubj = null;
 	private PreparedStatement psGetAllSubj = null;
-	private PreparedStatement dummyPs = null;
 	private ResultSet rsReadSubj = null;
 	private ResultSet rsGetAllSubj = null;
 	
 	// Constructor
 	public MySqlSubjectDao(Connection connection) throws DaoException {
-        try {
+		try {
 			this.connection = connection;
 			psCreateSubj = connection.prepareStatement(SQL_CREATE);
 			psReadSubj = connection.prepareStatement(SQL_READ);
@@ -37,11 +36,11 @@ public class MySqlSubjectDao implements SubjectDao {
 		} catch (SQLException exc) {
 			throw new DaoException ("Exception for DAO");
 		}			
-    }
+	}
 	
-    // Creates a new DB entry as per corresponding received object
-    @Override
-    public void create(Subject subject) throws DaoException {
+	// Create a new DB entry as per corresponding received object
+	@Override
+	public void create(Subject subject) throws DaoException {
 		try {
 			psCreateSubj.setInt(1, subject.getId());
 			psCreateSubj.setString(2, subject.getDescription());
@@ -49,11 +48,11 @@ public class MySqlSubjectDao implements SubjectDao {
 		} catch (SQLException exc) {
 			throw new DaoException ("Excepion for DAO");
 		}
-    }
+	}
 
-    // Returns the object corresponding to the DB entry with received primary 'key'
-    @Override
-    public Subject read(int key) throws DaoException {
+	// Return the object corresponding to the DB entry with received primary 'key'
+	@Override
+	public Subject read(int key) throws DaoException {
 		try {
 			psReadSubj.setInt(1, key);
 			rsReadSubj = psReadSubj.executeQuery();
@@ -78,9 +77,9 @@ public class MySqlSubjectDao implements SubjectDao {
 		}
 	}
 	
-    // Modifies the DB entry as per corresponding received object
-    @Override
-    public void update(Subject subject) throws DaoException {
+	// Modify the DB entry as per corresponding received object
+	@Override
+	public void update(Subject subject) throws DaoException {
 		try {
 			psUpdSubj.setString(1, subject.getDescription());
 			psUpdSubj.setInt(2, subject.getId());
@@ -90,9 +89,9 @@ public class MySqlSubjectDao implements SubjectDao {
 		}
 	}
 	
-    // Removes the DB entry as per corresponding received object
-    @Override
-    public void delete(int key) throws DaoException {
+	// Remove the DB entry as per corresponding received object
+	@Override
+	public void delete(int key) throws DaoException {
 		try {
 			psDelSubj.setInt(1, key);
 			psDelSubj.execute();
@@ -101,9 +100,9 @@ public class MySqlSubjectDao implements SubjectDao {
 		}
 	}
 	
-    // Returns a list of objects corresponding to all DB entries
-    @Override
-    public List<Subject> getAll() throws DaoException {
+	// Return a list of objects corresponding to all DB entries
+	@Override
+	public List<Subject> getAll() throws DaoException {
 		try {
 			rsGetAllSubj = psGetAllSubj.executeQuery();
 			List<Subject> list = new ArrayList<Subject>();
@@ -130,12 +129,11 @@ public class MySqlSubjectDao implements SubjectDao {
 		}
 	}
 	
-	// Terminates 'PreparedStatement' received as an argument
+	// Terminate 'PreparedStatement' object received as an argument
 	private void closePs(PreparedStatement dummyPs) throws DaoException {
-		this.dummyPs = dummyPs;
-		if (this.dummyPs != null) {
+		if (dummyPs != null) {
 			try {
-				this.dummyPs.close();
+				dummyPs.close();
 				//throw new SQLException(); // Uncomment this line to test exception handling
 			} catch (SQLException exc) {
 				throw new DaoException("Exception for Dao");
@@ -144,8 +142,23 @@ public class MySqlSubjectDao implements SubjectDao {
 			System.err.println ("PS statement was not created");
 		}
 	}
-		
-	// Terminates all 'PreparedStatement's
+	
+	// Terminate all 'PreparedStatement' objects - Version 1
+	@Override
+	public void close() {
+		DaoException e = null;
+		PreparedStatement[] array = {psCreateSubj, psReadSubj, psUpdSubj, psDelSubj, psGetAllSubj};
+		for (PreparedStatement dummyps1: array) {
+			try {
+				closePs(dummyps1);
+			} catch (DaoException exc) {
+				exc.printStackTrace();
+			}
+		}
+	}
+	
+	/*
+	// Terminate all 'PreparedStatement' objects - Version 2
 	public void close() {
 		try {
 			this.closePs(psCreateSubj);
@@ -172,6 +185,6 @@ public class MySqlSubjectDao implements SubjectDao {
 		} catch (DaoException exc) {
 			exc.printStackTrace();
 		}		
-	}
+	}*/
 }
 

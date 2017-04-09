@@ -19,5 +19,5 @@ public class DaoException extends Exception {
 	
 	public String toString() {
 		return "DaoException";
- 	}
+	}
 }
