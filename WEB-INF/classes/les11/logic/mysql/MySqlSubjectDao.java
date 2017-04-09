@@ -146,7 +146,6 @@ public class MySqlSubjectDao implements SubjectDao {
 	// Terminate all 'PreparedStatement' objects - Version 1
 	@Override
 	public void close() {
-		DaoException e = null;
 		PreparedStatement[] array = {psCreateSubj, psReadSubj, psUpdSubj, psDelSubj, psGetAllSubj};
 		for (PreparedStatement dummyps1: array) {
 			try {
