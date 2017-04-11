@@ -130,22 +130,22 @@ public class MySqlSubjectDao implements SubjectDao {
 	}
 	
 	// Terminate 'PreparedStatement' object received as an argument
-	private void closePs(PreparedStatement dummyPs) throws DaoException {
+	private void closePs(PreparedStatement dummyPs) throws SQLException {
 		if (dummyPs != null) {
-			try {
+			//try {
 				dummyPs.close();
-				//throw new SQLException(); // Uncomment this line to test exception handling
-			} catch (SQLException exc) {
-				throw new DaoException("Exception for Dao");
+				throw new SQLException(); // Uncomment this line to test exception handling
+			//} catch (SQLException exc) {
+			//	throw new DaoException("Exception for Dao");
 			}
-		} else {
+		 else {
 			System.err.println ("PS statement was not created");
 		}
 	}
-	
+	/*
 	// Terminate all 'PreparedStatement' objects - Version 1
 	@Override
-	public void close() {
+	public void close() throws DaoException {
 		PreparedStatement[] array = {psCreateSubj, psReadSubj, psUpdSubj, psDelSubj, psGetAllSubj};
 		for (PreparedStatement dummyps1: array) {
 			try {
@@ -155,35 +155,53 @@ public class MySqlSubjectDao implements SubjectDao {
 			}
 		}
 	}
+	*/
 	
-	/*
 	// Terminate all 'PreparedStatement' objects - Version 2
-	public void close() {
+	public void close() throws DaoException {
 		try {
-			this.closePs(psCreateSubj);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
+			closePs(psCreateSubj);
+		} catch (SQLException exc) {
+			System.out.println("1th exc thrown");
+			throw new DaoException("Exception for Dao");
 		}
-		try {
-			this.closePs(psReadSubj);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
+		finally {
+			try {
+				closePs(psReadSubj);
+			} catch (SQLException exc) {
+				System.out.println("2th exc thrown");
+				throw new DaoException("Exception for Dao");
+			}
+			finally {
+				try {
+					closePs(psUpdSubj);
+				} catch (SQLException exc) {
+					System.out.println("3th exc thrown");
+					throw new DaoException("Exception for Dao");
+				}
+				finally {
+					try {
+						closePs(psDelSubj);
+					} catch (SQLException exc) {
+						System.out.println("4th exc thrown");
+						throw new DaoException("Exception for Dao");
+						
+					}
+					finally {
+						try {
+							closePs(psGetAllSubj);
+						} catch (SQLException exc) {
+							System.out.println("5th exc thrown");
+							throw new DaoException("Exception for Dao");
+							
+						}
+						finally {
+							System.out.println("Attempts were undertaken to close all 'PreparedStatement's");
+						}
+					}
+				}
+			}
 		}
-		try {
-			this.closePs(psUpdSubj);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
-		}
-		try {
-			this.closePs(psDelSubj);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
-		}
-		try {
-			this.closePs(psGetAllSubj);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
-		}		
-	}*/
+	}
 }
 
