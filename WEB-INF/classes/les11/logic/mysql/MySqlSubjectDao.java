@@ -132,31 +132,34 @@ public class MySqlSubjectDao implements SubjectDao {
 	// Terminate 'PreparedStatement' object received as an argument
 	private void closePs(PreparedStatement dummyPs) throws SQLException {
 		if (dummyPs != null) {
-			//try {
-				dummyPs.close();
-				throw new SQLException(); // Uncomment this line to test exception handling
-			//} catch (SQLException exc) {
-			//	throw new DaoException("Exception for Dao");
-			}
-		 else {
+			dummyPs.close();
+			throw new SQLException(); // Uncomment this line to test exception handling
+		} else {
 			System.err.println ("PS statement was not created");
 		}
 	}
-	/*
+	
 	// Terminate all 'PreparedStatement' objects - Version 1
 	@Override
 	public void close() throws DaoException {
 		PreparedStatement[] array = {psCreateSubj, psReadSubj, psUpdSubj, psDelSubj, psGetAllSubj};
-		for (PreparedStatement dummyps1: array) {
+		int x =0;
+		while (x<5) {
 			try {
-				closePs(dummyps1);
-			} catch (DaoException exc) {
-				exc.printStackTrace();
+				closePs(array[x]);
+			} catch (SQLException exc) {
+				System.out.println("attempt " + x); // Uncomment this line to test exception handling
+				throw new DaoException("Exception for Dao");
+			}
+			finally {
+				x++;
+				continue;
 			}
 		}
 	}
-	*/
 	
+	
+	/*
 	// Terminate all 'PreparedStatement' objects - Version 2
 	public void close() throws DaoException {
 		try {
@@ -202,6 +205,6 @@ public class MySqlSubjectDao implements SubjectDao {
 				}
 			}
 		}
-	}
+	}*/
 }
 
