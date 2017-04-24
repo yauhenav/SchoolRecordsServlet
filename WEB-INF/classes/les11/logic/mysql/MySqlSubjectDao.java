@@ -138,7 +138,8 @@ public class MySqlSubjectDao implements SubjectDao {
 			System.err.println ("PS statement was not created");
 		}
 	}
-	
+
+	/*
 	// Terminate all 'PreparedStatement' objects - Version 1
 	@Override
 	public void close() throws DaoException {
@@ -150,16 +151,15 @@ public class MySqlSubjectDao implements SubjectDao {
 			} catch (SQLException exc) {
 				System.out.println("attempt " + x); // Uncomment this line to test exception handling
 				throw new DaoException("Exception for Dao");
-			}
-			finally {
+			} finally {
 				x++;
 				continue;
 			}
 		}
 	}
+	*/
 	
-	
-	/*
+
 	// Terminate all 'PreparedStatement' objects - Version 2
 	public void close() throws DaoException {
 		try {
@@ -205,6 +205,6 @@ public class MySqlSubjectDao implements SubjectDao {
 				}
 			}
 		}
-	}*/
+	}
 }
 
