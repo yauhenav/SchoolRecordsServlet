@@ -138,7 +138,7 @@ public class MySqlStudentDao implements StudentDao {
 		if (dummyPs != null) {
 			try {
 				dummyPs.close();
-				//throw new SQLException(); // Uncomment this line to test exception handling
+				throw new SQLException(); // Uncomment this line to test exception handling
 			} catch (SQLException exc) {
 				throw new DaoException("Exception for Dao");
 			}
@@ -149,31 +149,47 @@ public class MySqlStudentDao implements StudentDao {
 	
 	// Terminate all 'PreparedStatement' objects
 	@Override
-	public void close() {
+	public void close() throws DaoException {
+		DaoException exc = null;
 		try {
-			this.closePs(psCreateStud);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
-		}
-		try {
-			this.closePs(psReadStud);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
-		}
-		try {
-			this.closePs(psUpdStud);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
-		}
-		try {
-			this.closePs(psDelStud);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
-		}
-		try {
-			this.closePs(psGetAllStud);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
+			try {
+				this.closePs(psCreateStud);
+			} catch (DaoException e) {
+				System.out.println("1st exc thrown");
+				exc = e;
+			}
+			try {
+				this.closePs(psReadStud);
+			} catch (DaoException e) {
+				System.out.println("2nd exc thrown");
+				exc = e;
+			}
+			try {
+				this.closePs(psUpdStud);
+			} catch (DaoException e) {
+				System.out.println("3rd exc thrown");
+				exc = e;
+			}
+			try {
+				this.closePs(psDelStud);
+			} catch (DaoException e) {
+				System.out.println("4th exc thrown");
+				exc = e;
+			}
+			try {
+				this.closePs(psGetAllStud);
+			} catch (DaoException e) {
+				System.out.println("5th exc thrown");
+				exc = e;
+			}
+		} finally {
+			if (exc != null) {
+				System.out.println("Error was caught while closing MySqlStudentDao");
+				throw exc;
+			}
+			else {
+				System.out.println("No errors were caught while closing MySqlStudentDao");
+			}
 		}
 	}
 }

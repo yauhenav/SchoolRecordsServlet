@@ -26,5 +26,5 @@ public interface StudentDao {
 	public List<Student> getAll() throws DaoException;	
 	
 	// Terminate the connection and all 'PreparedStatement's
-	public void close();
+	public void close() throws DaoException;
 }

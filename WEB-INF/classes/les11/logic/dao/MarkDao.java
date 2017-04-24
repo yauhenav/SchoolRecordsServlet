@@ -29,5 +29,5 @@ public interface MarkDao {
 	public List<Mark> getAllMarkOneStud (int key) throws DaoException;
 	
 	// Terminate the connection and all 'PreparedStatement's
-	public void close();
+	public void close() throws DaoException;
 }

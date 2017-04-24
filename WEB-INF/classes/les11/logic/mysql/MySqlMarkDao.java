@@ -178,7 +178,7 @@ public class MySqlMarkDao implements MarkDao {
 		if (dummyPs != null) {
 			try {
 				dummyPs.close();
-				//throw new SQLException(); // Uncomment this line to test exception handling
+				throw new SQLException(); // Uncomment this line to test exception handling
 			} catch (SQLException exc) {
 				throw new DaoException("Exception for Dao");
 			}
@@ -188,36 +188,54 @@ public class MySqlMarkDao implements MarkDao {
 	}
 	
 	// Terminate all 'PreparedStatement' objects
-	public void close() {
+	@Override
+	public void close() throws DaoException {
+		DaoException exc = null;
 		try {
-			this.closePs(psCreateMark);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
-		}
-		try {
-			this.closePs(psReadMark);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
-		}
-		try {
-			this.closePs(psUpdMark);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
-		}
-		try {
-			this.closePs(psDelMark);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
-		}
-		try {
-			this.closePs(psGetAllMark);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
-		}
-		try {
-			this.closePs(psGetAllMarkOneStud);
-		} catch (DaoException exc) {
-			exc.printStackTrace();
+			try {
+				this.closePs(psCreateMark);
+			} catch (DaoException e) {
+				System.out.println("First exception thrown");
+				exc = e;
+			}
+			try {
+				this.closePs(psReadMark);
+			} catch (DaoException e) {
+				System.out.println("Second exception thrown");
+				exc.printStackTrace();
+			}
+			try {
+				this.closePs(psUpdMark);
+			} catch (DaoException e) {
+				System.out.println("Third exception thrown");
+				exc = e;
+			}
+			try {
+				this.closePs(psDelMark);
+			} catch (DaoException e) {
+				System.out.println("Fourth exception thrown");
+				exc = e;
+			}
+			try {
+				this.closePs(psGetAllMark);
+			} catch (DaoException e) {
+				System.out.println("Fifth exception thrown");
+				exc = e;
+			}
+			try {
+				this.closePs(psGetAllMarkOneStud);
+			} catch (DaoException e) {
+				System.out.println("Sixth exception thrown");
+				exc = e;
+			}
+		} finally {
+			if (exc != null) {
+				System.out.println("Error was caught while closing MySqlMarkDao");
+				throw exc;
+			}
+			else {
+				System.out.println("No errors were caught while closing MySqlMarkDao");
+			}
 		}
 	}
 }

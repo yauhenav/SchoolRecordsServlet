@@ -199,7 +199,7 @@ public class MySqlSubjectDao implements SubjectDao {
 							
 						}
 						finally {
-							System.out.println("Attempts were undertaken to close all 'PreparedStatement's");
+							System.out.println("Attempts were undertaken to close all 'PreparedStatement's in MySqlSubject Dao");
 						}
 					}
 				}

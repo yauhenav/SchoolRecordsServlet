@@ -141,29 +141,51 @@ public class Service {
 
 	// Close all 'PreparedStatement' objects and the 'Connection' object
 	public void closeEverything() {
+		DaoException exc = null;
 		try {
 			if (interDaoStud != null) {
-				interDaoStud.close();
+				try {
+					interDaoStud.close();
+				} catch (DaoException e) {
+					exc = e;
+				}
 			} else {
 				System.err.println("MySqlStudentDao object was not created");
 			}
 			if (interDaoSub != null) {
-				interDaoSub.close();
+				try {
+					interDaoSub.close();
+				} catch (DaoException e) {
+					exc = e;
+				}
 			} else {
 				System.err.println("MySqlSubjectDao object was not created");
 			}
 			if (interDaoMar != null) {
-				interDaoMar.close();
+				try {
+					interDaoMar.close();
+				} catch (DaoException e) {
+					exc = e;
+				}
 			} else {
 				System.err.println("MySqlMarkDao object was not created");
 			}
 			if (interDaoFact != null) {
-				interDaoFact.close();
+				try {
+					interDaoFact.close();
+				} catch (DaoException e) {
+					exc = e;
+				}
 			} else {
 				System.err.println("MySqlDaoFactory object was not created");
 			} 
-		} catch (DaoException exc) {
-			exc.printStackTrace();
+		} finally {
+			if (exc != null) {
+				System.out.println("Error was caught while attempting to close all PreparesStatemtnt's in all MySql*Dao classes");
+				exc.printStackTrace();
+			} else {
+				System.out.println("No errors was caught while attempting to close all PreparedStatement's in all MySql*Dao classes");
+			}
 		}
 	}
 }
