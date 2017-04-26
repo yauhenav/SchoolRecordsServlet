@@ -21,9 +21,7 @@ public class MySqlStudentDao implements StudentDao {
 	private PreparedStatement psUpdStud = null;
 	private PreparedStatement psDelStud = null;
 	private PreparedStatement psGetAllStud = null;
-	private ResultSet rsReadStud = null;
-	private ResultSet rsGetAllStud = null;
-	
+
 	// Constructor
 	public MySqlStudentDao(Connection connection) throws DaoException {
 		try {
@@ -54,6 +52,7 @@ public class MySqlStudentDao implements StudentDao {
 	// Return the object corresponding to the DB entry with received primary 'key'
 	@Override 
 	public Student read(int key) throws DaoException {
+		ResultSet rsReadStud = null;
 		try {
 			psReadStud.setInt(1, key);
 			rsReadStud = psReadStud.executeQuery();
@@ -106,6 +105,7 @@ public class MySqlStudentDao implements StudentDao {
 	// Return a list of objects corresponding to all DB entries
 	@Override
 	public List<Student> getAll() throws DaoException {
+		ResultSet rsGetAllStud = null;
 		try {
 			rsGetAllStud = psGetAllStud.executeQuery();        
 			List<Student> list = new ArrayList<Student>();
