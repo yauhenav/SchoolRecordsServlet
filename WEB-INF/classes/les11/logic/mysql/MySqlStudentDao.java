@@ -138,7 +138,7 @@ public class MySqlStudentDao implements StudentDao {
 		if (dummyPs != null) {
 			try {
 				dummyPs.close();
-				throw new SQLException(); // Uncomment this line to test exception handling
+				//throw new SQLException(); // Uncomment this line to test exception handling
 			} catch (SQLException exc) {
 				throw new DaoException("Exception for Dao");
 			}

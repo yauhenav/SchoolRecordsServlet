@@ -21,9 +21,7 @@ public class MySqlSubjectDao implements SubjectDao {
 	private PreparedStatement psUpdSubj = null;
 	private PreparedStatement psDelSubj = null;
 	private PreparedStatement psGetAllSubj = null;
-	private ResultSet rsReadSubj = null;
-	private ResultSet rsGetAllSubj = null;
-	
+
 	// Constructor
 	public MySqlSubjectDao(Connection connection) throws DaoException {
 		try {
@@ -53,6 +51,7 @@ public class MySqlSubjectDao implements SubjectDao {
 	// Return the object corresponding to the DB entry with received primary 'key'
 	@Override
 	public Subject read(int key) throws DaoException {
+		ResultSet rsReadSubj = null;
 		try {
 			psReadSubj.setInt(1, key);
 			rsReadSubj = psReadSubj.executeQuery();
@@ -103,6 +102,7 @@ public class MySqlSubjectDao implements SubjectDao {
 	// Return a list of objects corresponding to all DB entries
 	@Override
 	public List<Subject> getAll() throws DaoException {
+		ResultSet rsGetAllSubj = null;
 		try {
 			rsGetAllSubj = psGetAllSubj.executeQuery();
 			List<Subject> list = new ArrayList<Subject>();
@@ -130,81 +130,47 @@ public class MySqlSubjectDao implements SubjectDao {
 	}
 	
 	// Terminate 'PreparedStatement' object received as an argument
-	private void closePs(PreparedStatement dummyPs) throws SQLException {
+	private void closePs(PreparedStatement dummyPs) throws DaoException {
 		if (dummyPs != null) {
-			dummyPs.close();
-			throw new SQLException(); // Uncomment this line to test exception handling
+			try {
+				dummyPs.close();
+				//throw new SQLException(); // Uncomment this line to test exception handling
+			} catch (SQLException exc) {
+				throw new DaoException("Exception for Dao");
+			}
 		} else {
 			System.err.println ("PS statement was not created");
 		}
 	}
 
-	/*
-	// Terminate all 'PreparedStatement' objects - Version 1
-	@Override
+	// Terminate all 'PreparedStatement' objects
 	public void close() throws DaoException {
-		PreparedStatement[] array = {psCreateSubj, psReadSubj, psUpdSubj, psDelSubj, psGetAllSubj};
-		int x =0;
-		while (x<5) {
-			try {
-				closePs(array[x]);
-			} catch (SQLException exc) {
-				System.out.println("attempt " + x); // Uncomment this line to test exception handling
-				throw new DaoException("Exception for Dao");
-			} finally {
-				x++;
-				continue;
-			}
-		}
-	}
-	*/
-	
-
-	// Terminate all 'PreparedStatement' objects - Version 2
-	public void close() throws DaoException {
+		DaoException exc = null;
 		try {
-			closePs(psCreateSubj);
-		} catch (SQLException exc) {
-			System.out.println("1th exc thrown");
-			throw new DaoException("Exception for Dao");
-		}
-		finally {
+			try {
+				closePs(psCreateSubj);
+			} catch (DaoException e) {
+				exc = e;
+			}
 			try {
 				closePs(psReadSubj);
-			} catch (SQLException exc) {
-				System.out.println("2th exc thrown");
-				throw new DaoException("Exception for Dao");
+			} catch (DaoException e) {
+				exc = e;
 			}
-			finally {
-				try {
-					closePs(psUpdSubj);
-				} catch (SQLException exc) {
-					System.out.println("3th exc thrown");
-					throw new DaoException("Exception for Dao");
-				}
-				finally {
-					try {
-						closePs(psDelSubj);
-					} catch (SQLException exc) {
-						System.out.println("4th exc thrown");
-						throw new DaoException("Exception for Dao");
-						
-					}
-					finally {
-						try {
-							closePs(psGetAllSubj);
-						} catch (SQLException exc) {
-							System.out.println("5th exc thrown");
-							throw new DaoException("Exception for Dao");
-							
-						}
-						finally {
-							System.out.println("Attempts were undertaken to close all 'PreparedStatement's in MySqlSubject Dao");
-						}
-					}
-				}
+			try {
+				closePs(psUpdSubj);
+			} catch (DaoException e) {
+				exc = e;
+			}
+			try {
+				closePs(psDelSubj);
+			} catch (DaoException e) {
+				exc = e;
+			}
+		} finally {
+			if (exc != null) {
+				throw exc;
 			}
 		}
 	}
 }
-

@@ -23,10 +23,7 @@ public class MySqlMarkDao implements MarkDao {
 	private PreparedStatement psDelMark = null;
 	private PreparedStatement psGetAllMark = null;
 	private PreparedStatement psGetAllMarkOneStud = null;
-	private ResultSet rsReadMark = null;
-	private ResultSet rsGetAllMark = null;
-	private ResultSet rsGetAllMarkOneStud = null;
-	
+
 	// Constructor
 	public MySqlMarkDao(Connection connection) throws DaoException {
 		try {
@@ -59,6 +56,7 @@ public class MySqlMarkDao implements MarkDao {
 	// Return the object corresponding to the DB entry with received primary 'key'
 	@Override
 	public Mark read(int key) throws DaoException {
+		ResultSet rsReadMark = null;
 		try {
 			psReadMark.setInt(1, key);
 			rsReadMark = psReadMark.executeQuery();
@@ -113,6 +111,7 @@ public class MySqlMarkDao implements MarkDao {
 	// Return a list of objects corresponding to all DB entries
 	@Override
 	public List<Mark> getAll() throws DaoException {
+		ResultSet rsGetAllMark = null;
 		try {
 			rsGetAllMark = psGetAllMark.executeQuery();
 			List<Mark> list0 = new ArrayList<Mark>();
@@ -144,6 +143,7 @@ public class MySqlMarkDao implements MarkDao {
 	// Return a list of Marks of one Student as per received primary 'key'
 	@Override
 	public List<Mark> getAllMarkOneStud (int key) throws DaoException {
+		ResultSet rsGetAllMarkOneStud = null;
 		try {
 			psGetAllMarkOneStud.setInt(1, key);		
 			rsGetAllMarkOneStud = psGetAllMarkOneStud.executeQuery();
@@ -178,7 +178,7 @@ public class MySqlMarkDao implements MarkDao {
 		if (dummyPs != null) {
 			try {
 				dummyPs.close();
-				throw new SQLException(); // Uncomment this line to test exception handling
+				//throw new SQLException(); // Uncomment this line to test exception handling
 			} catch (SQLException exc) {
 				throw new DaoException("Exception for Dao");
 			}
@@ -195,46 +195,36 @@ public class MySqlMarkDao implements MarkDao {
 			try {
 				this.closePs(psCreateMark);
 			} catch (DaoException e) {
-				System.out.println("First exception thrown");
 				exc = e;
 			}
 			try {
 				this.closePs(psReadMark);
 			} catch (DaoException e) {
-				System.out.println("Second exception thrown");
 				exc.printStackTrace();
 			}
 			try {
 				this.closePs(psUpdMark);
 			} catch (DaoException e) {
-				System.out.println("Third exception thrown");
 				exc = e;
 			}
 			try {
 				this.closePs(psDelMark);
 			} catch (DaoException e) {
-				System.out.println("Fourth exception thrown");
 				exc = e;
 			}
 			try {
 				this.closePs(psGetAllMark);
 			} catch (DaoException e) {
-				System.out.println("Fifth exception thrown");
 				exc = e;
 			}
 			try {
 				this.closePs(psGetAllMarkOneStud);
 			} catch (DaoException e) {
-				System.out.println("Sixth exception thrown");
 				exc = e;
 			}
 		} finally {
 			if (exc != null) {
-				System.out.println("Error was caught while closing MySqlMarkDao");
 				throw exc;
-			}
-			else {
-				System.out.println("No errors were caught while closing MySqlMarkDao");
 			}
 		}
 	}
