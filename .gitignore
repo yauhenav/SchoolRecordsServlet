@@ -51,6 +51,7 @@ Temporary Items
 .idea/daoApp.iml
 .idea/dataSources.local.xml
 .idea/dataSources/a70a0f4c-56d5-4efe-9d0b-b8da1bb967cc.xml
+.idea/dataSources/*.xml
 .idea/misc.xml
 .idea/dataSources.xml
 .idea/vcs.xml
