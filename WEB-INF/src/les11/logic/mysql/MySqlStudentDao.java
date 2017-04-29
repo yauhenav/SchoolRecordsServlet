@@ -87,7 +87,7 @@ public class MySqlStudentDao implements StudentDao {
 			psUpdStud.setInt(3, student.getId());
 			psUpdStud.execute();
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		} 
 	}
 
@@ -98,7 +98,7 @@ public class MySqlStudentDao implements StudentDao {
 			psDelStud.setInt (1, key);
 			psDelStud.execute();
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		}
 	}
 
@@ -118,7 +118,7 @@ public class MySqlStudentDao implements StudentDao {
 			}
 			return list;
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		}
 		finally {
 			try {
@@ -128,7 +128,7 @@ public class MySqlStudentDao implements StudentDao {
 					System.err.println ("RS set of table results was not created");
 				}
 			} catch (SQLException exc) {
-					throw new DaoException ("Exception for DAO");
+					throw new DaoException ("Exception for DAO", exc);
 			}
 		}
 	}
@@ -140,7 +140,7 @@ public class MySqlStudentDao implements StudentDao {
 				dummyPs.close();
 				//throw new SQLException(); // Uncomment this line to test exception handling
 			} catch (SQLException exc) {
-				throw new DaoException("Exception for Dao");
+				throw new DaoException("Exception for Dao", exc);
 			}
 		} else {
 			System.err.println ("PS statement was not created");

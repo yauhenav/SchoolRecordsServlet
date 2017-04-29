@@ -32,7 +32,7 @@ public class MySqlSubjectDao implements SubjectDao {
 			psDelSubj = connection.prepareStatement(SQL_DELETE);
 			psGetAllSubj = connection.prepareStatement (SQL_GETALL);
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		}			
 	}
 	
@@ -44,7 +44,7 @@ public class MySqlSubjectDao implements SubjectDao {
 			psCreateSubj.setString(2, subject.getDescription());
 			psCreateSubj.execute();
 		} catch (SQLException exc) {
-			throw new DaoException ("Excepion for DAO");
+			throw new DaoException ("Excepion for DAO", exc);
 		}
 	}
 
@@ -61,7 +61,7 @@ public class MySqlSubjectDao implements SubjectDao {
 			tempSubj0.setDescription(rsReadSubj.getString("DESCRIPTION"));
 			return tempSubj0;
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for Dao");
+			throw new DaoException ("Exception for Dao", exc);
 		}
 		finally {
 			try {
@@ -71,7 +71,7 @@ public class MySqlSubjectDao implements SubjectDao {
 					System.err.println ("RS set of table results was not created");
 				}
 			} catch (SQLException exc) {
-				throw new DaoException ("Exception for DAO");
+				throw new DaoException ("Exception for DAO", exc);
 			}
 		}
 	}
@@ -84,7 +84,7 @@ public class MySqlSubjectDao implements SubjectDao {
 			psUpdSubj.setInt(2, subject.getId());
 			psUpdSubj.execute();
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		}
 	}
 	
@@ -95,7 +95,7 @@ public class MySqlSubjectDao implements SubjectDao {
 			psDelSubj.setInt(1, key);
 			psDelSubj.execute();
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		}
 	}
 	
@@ -114,7 +114,7 @@ public class MySqlSubjectDao implements SubjectDao {
 			}
 			return list;
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		}
 		finally {
 			try {
@@ -124,7 +124,7 @@ public class MySqlSubjectDao implements SubjectDao {
 					System.err.println ("RS set of table results was not created");
 				}
 			} catch (SQLException exc) {
-				throw new DaoException ("Exception for DAO");
+				throw new DaoException ("Exception for DAO", exc);
 			}
 		}
 	}
@@ -136,7 +136,7 @@ public class MySqlSubjectDao implements SubjectDao {
 				dummyPs.close();
 				//throw new SQLException(); // Uncomment this line to test exception handling
 			} catch (SQLException exc) {
-				throw new DaoException("Exception for Dao");
+				throw new DaoException("Exception for Dao", exc);
 			}
 		} else {
 			System.err.println ("PS statement was not created");

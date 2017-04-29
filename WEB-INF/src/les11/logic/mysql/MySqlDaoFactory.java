@@ -50,7 +50,7 @@ public class MySqlDaoFactory implements DaoFactory {
 			try {
 				connection.close();
 			} catch (SQLException exc) {
-				throw new DaoException("Exception for DAO");
+				throw new DaoException("Exception for DAO", exc);
 			}
 		} else {
 			System.err.println("Connection was not established");

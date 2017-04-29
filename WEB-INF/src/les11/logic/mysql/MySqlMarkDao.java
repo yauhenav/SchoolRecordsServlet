@@ -35,7 +35,7 @@ public class MySqlMarkDao implements MarkDao {
 			psGetAllMark = connection.prepareStatement(SQL_GETALL);
 			psGetAllMarkOneStud = connection.prepareStatement(SQL_GETALL_ONE_STUDENT);
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		}
 	}
 	
@@ -49,7 +49,7 @@ public class MySqlMarkDao implements MarkDao {
 			psCreateMark.setInt(4, mark.getSubjectId());
 			psCreateMark.execute();
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		} 
 	}
 	
@@ -68,7 +68,7 @@ public class MySqlMarkDao implements MarkDao {
 			tempMark0.setSubjectId(rsReadMark.getInt("SUBJECT_ID"));
 			return tempMark0;
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		}
 		finally {
 			try {
@@ -78,7 +78,7 @@ public class MySqlMarkDao implements MarkDao {
 					System.err.println ("RS set of table results was not created");
 				}
 			} catch (SQLException exc) {
-				throw new DaoException ("Exception for DAO");
+				throw new DaoException ("Exception for DAO", exc);
 			}
 		}
 	}	
@@ -93,7 +93,7 @@ public class MySqlMarkDao implements MarkDao {
 			psUpdMark.setInt(4, mark.getId());
 			psUpdMark.execute();
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		} 
 	}
 
@@ -104,7 +104,7 @@ public class MySqlMarkDao implements MarkDao {
 			psDelMark.setInt(1, key);
 			psDelMark.execute();
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		} 
 	}
 
@@ -125,7 +125,7 @@ public class MySqlMarkDao implements MarkDao {
 			}
 			return list0; 
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		}
 		finally {
 			try {
@@ -135,7 +135,7 @@ public class MySqlMarkDao implements MarkDao {
 					System.err.println ("RS set of table results was not created");
 				}
 			} catch (SQLException exc) {
-					throw new DaoException ("Exception for DAO");
+					throw new DaoException ("Exception for DAO", exc);
 			}
 		}
 	}
@@ -158,7 +158,7 @@ public class MySqlMarkDao implements MarkDao {
 			}
 			return list1; 
 		} catch (SQLException exc) {
-			throw new DaoException ("Exception for DAO");
+			throw new DaoException ("Exception for DAO", exc);
 		}
 		finally {
 			try {
@@ -168,7 +168,7 @@ public class MySqlMarkDao implements MarkDao {
 					System.err.println ("RS set of table results was not created");
 				}
 			} catch (SQLException exc) {
-					throw new DaoException ("Exception for DAO");
+					throw new DaoException ("Exception for DAO", exc);
 			}
 		}
 	}
@@ -180,7 +180,7 @@ public class MySqlMarkDao implements MarkDao {
 				dummyPs.close();
 				//throw new SQLException(); // Uncomment this line to test exception handling
 			} catch (SQLException exc) {
-				throw new DaoException("Exception for Dao");
+				throw new DaoException("Exception for Dao", exc);
 			}
 		} else {
 			System.err.println ("PS statement was not created");
