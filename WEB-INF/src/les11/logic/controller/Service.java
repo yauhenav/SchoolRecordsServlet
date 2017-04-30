@@ -181,7 +181,7 @@ public class Service {
             }
         } finally {
             if (exc != null) {
-                System.out.println("Error was caught while attempting to close all PreparesStatemtnt's in all MySql*Dao classes");
+                System.out.println("Error was caught while attempting to close all PreparesStatement's in all MySql*Dao classes");
                 exc.printStackTrace();
             } else {
                 System.out.println("No errors was caught while attempting to close all PreparedStatement's in all MySql*Dao classes");

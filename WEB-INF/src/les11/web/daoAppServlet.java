@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.sql.*;
 
 import les11.logic.controller.*;
@@ -17,15 +18,18 @@ import les11.logic.mysql.*;
 public class daoAppServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            HttpSession sessObj = req.getSession(true);
             Service mngob = new Service();
+            sessObj.setAttribute("sessionObject", mngob);
             resp.setContentType("text/html;charset=utf-8");
             PrintWriter pw = resp.getWriter();
+            Service sesMngObj = (Service) sessObj.getAttribute("sessionObject");
 
             // Display all students
             if (req.getParameter("show_all_students") != null) {
                 pw.println("<B>Here's a list of all students in the DB</B>");
                 pw.println("<table border=1>");
-                List<Student> lst = mngob.displayAllStudents();
+                List<Student> lst = sesMngObj.displayAllStudents();
                 Iterator<Student> itrstud0 = lst.iterator();
                 while (itrstud0.hasNext()) {
                     pw.println("<tr>");
@@ -41,7 +45,7 @@ public class daoAppServlet extends HttpServlet {
                 pw.println("<table border=1>");
                 String paramVal = req.getParameter("show_student_ID");
                 int key = Integer.parseInt(paramVal);
-                Student element = mngob.displayOneStudent(key);
+                Student element = sesMngObj.displayOneStudent(key);
                 pw.println("<tr>");
                 pw.println("<td>" + element + "</td>");
                 pw.println("</tr>");
@@ -56,7 +60,7 @@ public class daoAppServlet extends HttpServlet {
                 int id = Integer.parseInt(idValue);
                 String nameValue = req.getParameter("new_student_name");
                 String surnameValue = req.getParameter("new_student_surname");
-                mngob.addStudent(id, nameValue, surnameValue);
+                sesMngObj.addStudent(id, nameValue, surnameValue);
             }
 
             // Update existing student
@@ -67,7 +71,7 @@ public class daoAppServlet extends HttpServlet {
                 int id = Integer.parseInt(idValue);
                 String nameValue = req.getParameter("update_student_name");
                 String surnameValue = req.getParameter("update_student_surname");
-                mngob.updateStudent(id, nameValue, surnameValue);
+                sesMngObj.updateStudent(id, nameValue, surnameValue);
             }
 
             // Delete specified student
@@ -76,7 +80,7 @@ public class daoAppServlet extends HttpServlet {
                 pw.println("Go to home page and press button in Show all students section to check if student was deleted");
                 String idValue = req.getParameter("delete_student_ID");
                 int id = Integer.parseInt(idValue);
-                mngob.deleteStudent(id);
+                sesMngObj.deleteStudent(id);
             }
 
             // Display one specified subject
@@ -85,7 +89,7 @@ public class daoAppServlet extends HttpServlet {
                 pw.println("<table border=1>");
                 String paramVal = req.getParameter("show_subject_ID");
                 int key = Integer.parseInt(paramVal);
-                Subject element = mngob.displayOneSubject(key);
+                Subject element = sesMngObj.displayOneSubject(key);
                 pw.println("<tr>");
                 pw.println("<td>" + element + "</td>");
                 //pw.println(element.toString());
@@ -97,7 +101,7 @@ public class daoAppServlet extends HttpServlet {
             else if (req.getParameter("show_all_subjects") != null) {
                 pw.println("<B>Here's a list of all subjects in the DB</B>");
                 pw.println("<table border=1>");
-                List<Subject> lst = mngob.displayAllSubjects();
+                List<Subject> lst = sesMngObj.displayAllSubjects();
                 Iterator<Subject> itrsub0 = lst.iterator();
                 while (itrsub0.hasNext()) {
                     pw.println("<tr>");
@@ -114,7 +118,7 @@ public class daoAppServlet extends HttpServlet {
                 String idValue = req.getParameter("new_subject_ID");
                 int id = Integer.parseInt(idValue);
                 String descriptionValue = req.getParameter("new_subject_description");
-                mngob.addSubject(id, descriptionValue);
+                sesMngObj.addSubject(id, descriptionValue);
             }
 
             // Update existing subject
@@ -124,7 +128,7 @@ public class daoAppServlet extends HttpServlet {
                 String idValue = req.getParameter("update_subject_ID");
                 int id = Integer.parseInt(idValue);
                 String descriptionValue = req.getParameter("update_subject_description");
-                mngob.updateSubject(id, descriptionValue);
+                sesMngObj.updateSubject(id, descriptionValue);
             }
 
             // Delete specified subject
@@ -133,7 +137,7 @@ public class daoAppServlet extends HttpServlet {
                 pw.println("Go to home page and press button in Show all subjects section to check if subject was deleted");
                 String idValue = req.getParameter("delete_subject_ID");
                 int id = Integer.parseInt(idValue);
-                mngob.deleteSubject(id);
+                sesMngObj.deleteSubject(id);
             }
 
             // Show one specified mark
@@ -142,7 +146,7 @@ public class daoAppServlet extends HttpServlet {
                 pw.println("<table border=1>");
                 String paramVal = req.getParameter("show_mark_ID");
                 int key = Integer.parseInt(paramVal);
-                Mark element = mngob.displayOneMark(key);
+                Mark element = sesMngObj.displayOneMark(key);
                 pw.println("<tr>");
                 pw.println("<td>" + element + "</td>");
                 pw.println("</tr>");
@@ -153,7 +157,7 @@ public class daoAppServlet extends HttpServlet {
             else if (req.getParameter("show_all_marks") != null) {
                 pw.println("<B>Here's a list of all marks in the DB</B>");
                 pw.println("<table border=1>");
-                List<Mark> lst = mngob.displayAllMarks();
+                List<Mark> lst = sesMngObj.displayAllMarks();
                 Iterator<Mark> itrmar0 = lst.iterator();
                 while (itrmar0.hasNext()) {
                     pw.println("<tr>");
@@ -169,7 +173,7 @@ public class daoAppServlet extends HttpServlet {
                 pw.println("<table border=1>");
                 String paramVal = req.getParameter("show_all_marks_1stud");
                 int key = Integer.parseInt(paramVal);
-                List<Mark> lst1 = mngob.displayMarksOneStud(key);
+                List<Mark> lst1 = sesMngObj.displayMarksOneStud(key);
                 Iterator<Mark> itrmar1 = lst1.iterator();
                 while (itrmar1.hasNext()) {
                     pw.println("<tr>");
@@ -191,7 +195,7 @@ public class daoAppServlet extends HttpServlet {
                 int studentId = Integer.parseInt(studentIdValue);
                 String subjectIdValue = req.getParameter("new_mark_subjectId");
                 int subjectId = Integer.parseInt(subjectIdValue);
-                mngob.addMark (id, value, studentId, subjectId);
+                sesMngObj.addMark (id, value, studentId, subjectId);
             }
 
             // Update existing mark
@@ -206,7 +210,7 @@ public class daoAppServlet extends HttpServlet {
                 int studentId = Integer.parseInt(studentIdValue);
                 String subjectIdValue = req.getParameter("update_mark_subjectId");
                 int subjectId = Integer.parseInt(subjectIdValue);
-                mngob.updateMark (id, value, studentId, subjectId);
+                sesMngObj.updateMark (id, value, studentId, subjectId);
             }
 
             // Delete specified mark
@@ -215,13 +219,15 @@ public class daoAppServlet extends HttpServlet {
                 pw.println("Go to home page and press button in Show all marks section to check if mark was deleted");
                 String idValue = req.getParameter("delete_mark_ID");
                 int id = Integer.parseInt(idValue);
-                mngob.deleteMark(id);
+                sesMngObj.deleteMark(id);
             }
 
             // Close all 'PreparedStatement' objects and the connection
             else if (req.getParameter("close_everything") != null) {
                 pw.println("<B>All prepared statements and connections are closed</B>");
-                mngob.closeEverything();
+                sesMngObj.closeEverything();
+                sessObj.removeAttribute("sessionObject");
+                sessObj.invalidate();
             }
         } catch (DaoException exc) {
             exc.printStackTrace();
