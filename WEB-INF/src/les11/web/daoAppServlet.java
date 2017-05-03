@@ -17,13 +17,11 @@ public class daoAppServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             Service sesMngObj;
-            Service mngObject;
             HttpSession sessObj = req.getSession(false);
             if (sessObj == null) {
                 sessObj = req.getSession(true);
-                mngObject = new Service();
-                sessObj.setAttribute("sessionObject", mngObject);
-                sesMngObj = (Service) sessObj.getAttribute("sessionObject");
+                sesMngObj = new Service();
+                sessObj.setAttribute("sessionObject", sesMngObj);
             } else {
                 sesMngObj = (Service) sessObj.getAttribute("sessionObject");
             }
