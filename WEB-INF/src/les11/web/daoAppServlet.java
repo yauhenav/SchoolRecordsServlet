@@ -16,16 +16,8 @@ public class daoAppServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         try {
-            Service sesMngObj;
-            HttpSession sessObj = req.getSession(false);
-            if (sessObj == null) {
-                sessObj = req.getSession(true);
-                sesMngObj = new Service();
-                sessObj.setAttribute("sessionObject", sesMngObj);
-            } else {
-                sesMngObj = (Service) sessObj.getAttribute("sessionObject");
-            }
-
+            HttpSession sessObj = req.getSession(true);
+            Service sesMngObj = (Service) sessObj.getAttribute("sessionObject");
             resp.setContentType("text/html;charset=utf-8");
             PrintWriter pw = resp.getWriter();
 

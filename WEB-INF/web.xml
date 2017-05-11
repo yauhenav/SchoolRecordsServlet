@@ -13,4 +13,8 @@
     <url-pattern>/daoApp</url-pattern>
   </servlet-mapping>
 
+  <listener>
+    <listener-class>les11.web.MySesListener</listener-class>
+   </listener>
+
 </web-app>
