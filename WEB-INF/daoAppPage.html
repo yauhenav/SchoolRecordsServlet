@@ -11,7 +11,7 @@
   <td><input type=number name="show_student_ID" size="25" value=""></td> 
 </tr> 
 </table> 
-<input type=submit value="Show student"> 
+<input type=submit name="action" value="Show student">
 </form>
 
 <form name="Form2" 
@@ -22,7 +22,7 @@
     <td><B>Press the button to show all students</B></td>
 </tr> 
 </table> 
-<input type=submit name="show_all_students" value="Show all students">
+<input type=submit name="action" value="Show all students">
 </form>
 
 <form name="Form3" 
@@ -45,7 +45,7 @@
   <td><input type=text name="new_student_surname" size="25" value=""></td>
  </tr>
  </table> 
-<input type=submit value="Add new student"> 
+<input type=submit name="action" value="Add new student">
 </form>
 
 <form name="Form4" 
@@ -68,7 +68,7 @@
   <td><input type=text name="update_student_surname" size="25" value=""></td>
  </tr>
  </table> 
-<input type=submit value="Update student"> 
+<input type=submit name="action" value="Update student">
 </form>
 
 <form name="Form5" 
@@ -80,7 +80,7 @@
   <td><input type=number name="delete_student_ID" size="25" value=""></td> 
 </tr> 
 </table> 
-<input type=submit value="Delete student"> 
+<input type=submit name="action" value="Delete student">
 </form>
 	
 <form name="Form6" 
@@ -92,7 +92,7 @@
   <td><input type=number name="show_subject_ID" size="25" value=""></td> 
 </tr> 
 </table> 
-<input type=submit value="Show subject">
+<input type=submit name="action" value="Show subject">
 </form>	
 	
 <form name="Form7" 
@@ -103,7 +103,7 @@
     <td><B>Press the button to show all subjects</B></td>
 </tr> 
 </table> 
-<input type=submit name="show_all_subjects" value="Show all subjects">
+<input type=submit name="action" value="Show all subjects">
 </form>	
 
 <form name="Form8" 
@@ -122,7 +122,7 @@
   <td><input type=text name="new_subject_description" size="25" value=""></td>
  </tr>
  </table> 
-<input type=submit value="Add new subject"> 
+<input type=submit name="action" value="Add new subject">
 </form>	
 	
 <form name="Form9" 
@@ -140,7 +140,7 @@
       <td><B>Enter subject description</B></td>
   <td><input type=text name="update_subject_description" size="25" value=""></td>
  </table> 
-<input type=submit value="Update subject"> 
+<input type=submit name="action" value="Update subject">
 </form>
 	
 <form name="Form10" 
@@ -152,7 +152,7 @@
   <td><input type=number name="delete_subject_ID" size="25" value=""></td> 
 </tr> 
 </table> 
-<input type=submit value="Delete subject"> 
+<input type=submit name="action" value="Delete subject">
 </form>
 
 <form name="Form11" 
@@ -164,7 +164,7 @@
   <td><input type=number name="show_mark_ID" size="25" value=""></td> 
 </tr> 
 </table> 
-<input type=submit value="Show mark"> 
+<input type=submit name="action" value="Show mark">
 </form>		
 
 <form name="Form12" 
@@ -175,7 +175,7 @@
     <td><B>Press the button to show all marks</B></td>
 </tr> 
 </table> 
-<input type=submit name="show_all_marks" value="Show all marks">
+<input type=submit name="action" value="Show all marks">
 </form>	
 	
 <form name="Form13" 
@@ -187,9 +187,8 @@
   <td><input type=number name="show_all_marks_1stud" size="25" value=""></td> 
 </tr> 
 </table> 
-<input type=submit value="Show student's marks"> 
+<input type=submit name="action" value="Show student's marks">
 </form>		
-	
 
 <form name="Form14" 
   method="get" 
@@ -203,7 +202,7 @@
   <td><input type=number name="new_mark_ID" size="25" value=""></td>
  </tr>
   <tr>
-      <td><B>Enter mark value name</B></td>
+      <td><B>Enter mark value</B></td>
   <td><input type=number name="new_mark_value" size="25" value=""></td>
  </tr>
   <tr>
@@ -214,7 +213,7 @@
   <td><input type=number name="new_mark_subjectId" size="25" value=""></td>
  </tr>
  </table> 
-<input type=submit value="Add new mark"> 
+<input type=submit name="action" value="Add new mark">
 </form>
 	
 
@@ -230,7 +229,7 @@
   <td><input type=number name="update_mark_ID" size="25" value=""></td>
  </tr>
   <tr>
-      <td><B>Enter mark value name</B></td>
+      <td><B>Enter mark value</B></td>
   <td><input type=number name="update_mark_value" size="25" value=""></td>
  </tr>
   <tr>
@@ -241,7 +240,7 @@
   <td><input type=number name="update_mark_subjectId" size="25" value=""></td>
  </tr>
  </table> 
-<input type=submit value="Update existing mark"> 
+<input type=submit name="action" value="Update existing mark">
 </form>
 		
 <form name="Form16" 
@@ -253,7 +252,7 @@
   <td><input type=number name="delete_mark_ID" size="25" value=""></td> 
 </tr> 
 </table> 
-<input type=submit value="Delete mark"> 
+<input type=submit name="action" value="Delete mark">
 </form>
 	
 <form name="FormLastOne" 
@@ -264,7 +263,7 @@
     <td><B>Press the button to gracefully close all prepared statements and connections</B></td>
 </tr> 
 </table> 
-<input type=submit name="close_everything" value="Close everything">
+<input type=submit name="action" value="Close everything">
 </form>	
 
 </center>

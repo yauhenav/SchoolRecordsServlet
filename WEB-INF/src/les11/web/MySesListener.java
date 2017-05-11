@@ -17,6 +17,6 @@ public class MySesListener implements HttpSessionListener {
         sessObj.setAttribute("sessionObject", sesMngObj);
     }
     public void sessionDestroyed(HttpSessionEvent e) {
-        System.out.println("Session was closed by user via button in HTML index page");
+        sesMngObj.closeEverything();
     }
 }
