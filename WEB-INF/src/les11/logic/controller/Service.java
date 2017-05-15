@@ -1,8 +1,6 @@
 package les11.logic.controller;
 
-import java.sql.*;
 import java.util.*;
-import java.io.*;
 
 import les11.logic.dao.*;
 import les11.logic.dto.*;
@@ -140,7 +138,7 @@ public class Service {
     }
 
     // Close all 'PreparedStatement' objects and the 'Connection' object
-    public void closeEverything() {
+    public void close() {
         DaoException exc = null;
         try {
             if (interDaoStud != null) {

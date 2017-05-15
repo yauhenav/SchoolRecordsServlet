@@ -17,6 +17,6 @@ public class MySesListener implements HttpSessionListener {
         sessObj.setAttribute("sessionObject", sesMngObj);
     }
     public void sessionDestroyed(HttpSessionEvent e) {
-        sesMngObj.closeEverything();
+        sesMngObj.close();
     }
 }

@@ -12,7 +12,7 @@ import les11.logic.controller.*;
 import les11.logic.dto.*;
 import les11.logic.exception.*;
 
-public class DaoAppServlet extends HttpServlet {
+public class SchoolRecordsServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

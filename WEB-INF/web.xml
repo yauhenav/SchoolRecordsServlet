@@ -4,12 +4,12 @@
 <web-app>
 
   <servlet>
-    <servlet-name>daoApp</servlet-name>
-    <servlet-class>les11.web.DaoAppServlet</servlet-class>
+    <servlet-name>anyname</servlet-name>
+    <servlet-class>les11.web.SchoolRecordsServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>daoApp</servlet-name>
+    <servlet-name>anyname</servlet-name>
     <url-pattern>/daoApp</url-pattern>
   </servlet-mapping>
 
