@@ -3,18 +3,18 @@
 
 <web-app>
 
+  <listener>
+    <listener-class>les11.web.SessionListener</listener-class>
+  </listener>
+
   <servlet>
-    <servlet-name>anyname</servlet-name>
+    <servlet-name>SchoolRecordsServlet</servlet-name>
     <servlet-class>les11.web.SchoolRecordsServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>anyname</servlet-name>
-    <url-pattern>/daoApp</url-pattern>
+    <servlet-name>SchoolRecordsServlet</servlet-name>
+    <url-pattern>/SchoolRecordsServlet</url-pattern>
   </servlet-mapping>
-
-  <listener>
-    <listener-class>les11.web.MySesListener</listener-class>
-   </listener>
 
 </web-app>
