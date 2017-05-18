@@ -404,7 +404,6 @@ public class SchoolRecordsServlet extends HttpServlet {
      */
     private void executeCloseEverything (PrintWriter pw, HttpSession sessObj) throws DaoException {
         pw.println("<B>This session has been closed, resulting in closure of all prepared statements, and connection</B>");
-        sessObj.removeAttribute("sessionObject");
         sessObj.invalidate();
     }
 }
