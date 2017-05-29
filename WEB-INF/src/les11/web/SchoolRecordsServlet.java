@@ -135,7 +135,8 @@ public class SchoolRecordsServlet extends HttpServlet {
         if (idValue.matches("[0-9]+") && nameValue.matches("[A-Za-z]+")
                 && surnameValue.matches("[A-Za-z]+")) {
             int id = Integer.parseInt(idValue);
-            sesMngObj.addStudent(id, nameValue, surnameValue);
+            Student student = new Student(id, nameValue, surnameValue);
+            sesMngObj.addStudent(student);
             pw.println("<B>New student has been added</B>");
             pw.println("Go to home page and press button in Show all students " +
                     "section to check if student was added");
@@ -155,7 +156,8 @@ public class SchoolRecordsServlet extends HttpServlet {
         if (idValue.matches("[0-9]+") && nameValue.matches("[A-Za-z]+")
                 && surnameValue.matches("[A-Za-z]+")) {
             int id = Integer.parseInt(idValue);
-            sesMngObj.updateStudent(id, nameValue, surnameValue);
+            Student student = new Student(id, nameValue, surnameValue);
+            sesMngObj.updateStudent(student);
             pw.println("<B>Update of existing student</B>");
             pw.println("Go to home page and press button in Show all students " +
                     "section to check if student was updated");

@@ -57,7 +57,7 @@ public class MySqlStudentDao implements StudentDao {
             psReadStud.setInt(1, key);
             rsReadStud = psReadStud.executeQuery();
             rsReadStud.next();
-            Student tempStud0 = new Student();
+            Student tempStud0 = new Student(0, null, null);
             tempStud0.setId(rsReadStud.getInt("ID"));
             tempStud0.setName(rsReadStud.getString("NAME"));
             tempStud0.setSurname(rsReadStud.getString("SURNAME"));
@@ -110,7 +110,7 @@ public class MySqlStudentDao implements StudentDao {
             rsGetAllStud = psGetAllStud.executeQuery();
             List<Student> list = new ArrayList<Student>();
             while (rsGetAllStud.next()) {
-                Student tempStud1 = new Student();
+                Student tempStud1 = new Student(0, null, null);
                 tempStud1.setId(rsGetAllStud.getInt("ID"));
                 tempStud1.setName(rsGetAllStud.getString("NAME"));
                 tempStud1.setSurname(rsGetAllStud.getString("SURNAME"));

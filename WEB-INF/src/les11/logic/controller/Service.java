@@ -39,20 +39,12 @@ public class Service {
     }
 
     // Add new entry into DB as per received attributes for a 'Student' DTO
-    public void addStudent(int id, String name, String surname) throws DaoException {
-        Student dummyStud4 = new Student();
-        dummyStud4.setId(id);
-        dummyStud4.setName(name);
-        dummyStud4.setSurname(surname);
+    public void addStudent(Student dummyStud4) throws DaoException {
         interDaoStud.create(dummyStud4);
     }
 
     // Update existing DB entry as per received attributes for a 'Student' DTO
-    public void updateStudent(int id, String name, String surname) throws DaoException {
-        Student dummyStud2 = new Student();
-        dummyStud2.setId(id);
-        dummyStud2.setName(name);
-        dummyStud2.setSurname(surname);
+    public void updateStudent(Student dummyStud2) throws DaoException {
         interDaoStud.update (dummyStud2);
     }
 
