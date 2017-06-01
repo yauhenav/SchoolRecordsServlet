@@ -51,17 +51,16 @@ public class MySqlStudentDao implements StudentDao {
 
     // Return the object corresponding to the DB entry with received primary 'key'
     @Override
-    public Student read(int key) throws DaoException {
+    public Student read(Student student) throws DaoException {
         ResultSet rsReadStud = null;
         try {
-            psReadStud.setInt(1, key);
+            psReadStud.setInt(1, student.getId());
             rsReadStud = psReadStud.executeQuery();
             rsReadStud.next();
-            Student tempStud0 = new Student(0, null, null);
-            tempStud0.setId(rsReadStud.getInt("ID"));
-            tempStud0.setName(rsReadStud.getString("NAME"));
-            tempStud0.setSurname(rsReadStud.getString("SURNAME"));
-            return tempStud0;
+            student.setId(rsReadStud.getInt("ID"));
+            student.setName(rsReadStud.getString("NAME"));
+            student.setSurname(rsReadStud.getString("SURNAME"));
+            return student;
         } catch (SQLException exc) {
             throw new DaoException ("Exception for DAO");
         }
@@ -93,9 +92,9 @@ public class MySqlStudentDao implements StudentDao {
 
     // Remove the DB entry as per corresponding received object
     @Override
-    public void delete(int key) throws DaoException {
+    public void delete(Student student) throws DaoException {
         try {
-            psDelStud.setInt (1, key);
+            psDelStud.setInt (1, student.getId());
             psDelStud.execute();
         } catch (SQLException exc) {
             throw new DaoException ("Exception for DAO", exc);

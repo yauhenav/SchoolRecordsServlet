@@ -27,9 +27,8 @@ public class Service {
     }
 
     // Retrieve one 'Student' DTO from the DB as per received ID
-    public Student displayOneStudent(int key) throws DaoException {
-        Student dummyStud1 = interDaoStud.read(key);
-        return dummyStud1;
+    public Student displayOneStudent(Student student) throws DaoException {
+        return interDaoStud.read(student);
     }
 
     //Retrieve all 'Student' DTO's from the DB
@@ -49,8 +48,8 @@ public class Service {
     }
 
     // Delete existing entry from DB as per received ID for a 'Student' DTO
-    public void deleteStudent(int id) throws DaoException {
-        interDaoStud.delete (id);
+    public void deleteStudent(Student student) throws DaoException {
+        interDaoStud.delete (student);
     }
 
     // Retrieve one 'Subject' DTO from DB as per specified ID

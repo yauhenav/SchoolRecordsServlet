@@ -112,11 +112,12 @@ public class SchoolRecordsServlet extends HttpServlet {
         String paramVal = req.getParameter("show_student_ID");
         if (paramVal.matches("[0-9]+")) {
             int key = Integer.parseInt(paramVal);
-            Student element = sesMngObj.displayOneStudent(key);
+            Student student = new Student(key);
+            sesMngObj.displayOneStudent(student);
             pw.println("<B>Here goes one student from selected key</B>");
             pw.println("<table border=1>");
             pw.println("<tr>");
-            pw.println("<td>" + element + "</td>");
+            pw.println("<td>" + student + "</td>");
             pw.println("</tr>");
             pw.println("</table>");
         } else {
@@ -174,7 +175,8 @@ public class SchoolRecordsServlet extends HttpServlet {
         String idValue = req.getParameter("delete_student_ID");
         if (idValue.matches("[0-9]+")) {
             int id = Integer.parseInt(idValue);
-            sesMngObj.deleteStudent(id);
+            Student student = new Student (id);
+            sesMngObj.deleteStudent(student);
             pw.println("<B>Deletion of existing student</B>");
             pw.println("Go to home page and press button in Show all students " +
                     "section to check if student was deleted");

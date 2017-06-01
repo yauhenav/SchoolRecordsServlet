@@ -1,16 +1,15 @@
 package les11.logic.dto;
 
-import java.util.*;
-
-import les11.logic.controller.*;
-import les11.logic.dao.*;
-import les11.logic.exception.*;
-import les11.logic.mysql.*;
-
 public class Student {
     private int id;
     private String name;
     private String surname;
+
+    public Student(int id) {
+        this.id = id;
+        name = null;
+        surname = null;
+    }
 
     public Student(int id, String name, String surname) {
         this.id = id;
@@ -43,6 +42,6 @@ public class Student {
     }
 
     public String toString() {
-        return "[Student's name: " + this.name + " " + this.surname + "]";
+        return "[Student's name: " + this.name + " " + this.surname + ", ID No." + this. id + "]";
     }
 }

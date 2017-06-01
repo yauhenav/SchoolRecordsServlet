@@ -14,13 +14,13 @@ public interface StudentDao {
     public void create(Student student) throws DaoException;
 
     // Return the object corresponding to the DB entry with received primary 'key'
-    public Student read(int key) throws DaoException;
+    public Student read(Student student) throws DaoException;
 
     // Modify the DB entry as per corresponding received object
     public void update(Student student) throws DaoException;
 
     // Remove the DB entry as per corresponding received object
-    public void delete(int key) throws DaoException;
+    public void delete(Student student) throws DaoException;
 
     // Return a list of objects corresponding to all DB entries
     public List<Student> getAll() throws DaoException;
