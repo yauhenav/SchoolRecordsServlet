@@ -9,13 +9,12 @@ import les11.logic.dto.*;
 import les11.logic.exception.*;
 
 public class MySqlMarkDao implements MarkDao {
-    private Connection connection;
     private final static String SQL_CREATE = "INSERT INTO daotrain.MARK (ID, VALUE, STUDENT_ID, SUBJECT_ID) VALUES (?, ?, ?, ?)";
-    private final static String SQL_READ = "SELECT ID, VALUE, STUDENT_ID, SUBJECT_ID FROM daotrain.MARK WHERE ID = ?";
+    private final static String SQL_READ = "SELECT VALUE, STUDENT_ID, SUBJECT_ID FROM daotrain.MARK WHERE ID = ?";
     private final static String SQL_UPDATE = "UPDATE daotrain.MARK SET VALUE = ?, STUDENT_ID = ?, SUBJECT_ID = ? WHERE ID = ?";
     private final static String SQL_DELETE = "DELETE FROM daotrain.MARK WHERE ID = ?";
     private final static String SQL_GETALL = "SELECT ID, VALUE, STUDENT_ID, SUBJECT_ID FROM daotrain.MARK";
-    private final static String SQL_GETALL_ONE_STUDENT = "SELECT ID, VALUE, STUDENT_ID, SUBJECT_ID FROM daotrain.MARK WHERE STUDENT_ID = ?";
+    private final static String SQL_GETALL_ONE_STUDENT = "SELECT ID, VALUE, SUBJECT_ID FROM daotrain.MARK WHERE STUDENT_ID = ?";
 
     private PreparedStatement psCreateMark = null;
     private PreparedStatement psReadMark = null;
@@ -27,7 +26,6 @@ public class MySqlMarkDao implements MarkDao {
     // Constructor
     public MySqlMarkDao(Connection connection) throws DaoException {
         try {
-            this.connection = connection;
             psCreateMark = connection.prepareStatement(SQL_CREATE);
             psReadMark = connection.prepareStatement(SQL_READ);
             psUpdMark = connection.prepareStatement(SQL_UPDATE);
@@ -55,18 +53,16 @@ public class MySqlMarkDao implements MarkDao {
 
     // Return the object corresponding to the DB entry with received primary 'key'
     @Override
-    public Mark read(int key) throws DaoException {
+    public Mark read(Mark mark) throws DaoException {
         ResultSet rsReadMark = null;
         try {
-            psReadMark.setInt(1, key);
+            psReadMark.setInt(1, mark.getId());
             rsReadMark = psReadMark.executeQuery();
             rsReadMark.next();
-            Mark tempMark0 = new Mark();
-            tempMark0.setId(rsReadMark.getInt("ID"));
-            tempMark0.setValue(rsReadMark.getInt("VALUE"));
-            tempMark0.setStudentId(rsReadMark.getInt("STUDENT_ID"));
-            tempMark0.setSubjectId(rsReadMark.getInt("SUBJECT_ID"));
-            return tempMark0;
+            mark.setValue(rsReadMark.getInt("VALUE"));
+            mark.setStudentId(rsReadMark.getInt("STUDENT_ID"));
+            mark.setSubjectId(rsReadMark.getInt("SUBJECT_ID"));
+            return mark;
         } catch (SQLException exc) {
             throw new DaoException ("Exception for DAO", exc);
         }
@@ -99,9 +95,9 @@ public class MySqlMarkDao implements MarkDao {
 
     // Remove the DB entry as per corresponding received object
     @Override
-    public void delete(int key) throws DaoException {
+    public void delete(Mark mark) throws DaoException {
         try {
-            psDelMark.setInt(1, key);
+            psDelMark.setInt(1, mark.getId());
             psDelMark.execute();
         } catch (SQLException exc) {
             throw new DaoException ("Exception for DAO", exc);
@@ -114,16 +110,16 @@ public class MySqlMarkDao implements MarkDao {
         ResultSet rsGetAllMark = null;
         try {
             rsGetAllMark = psGetAllMark.executeQuery();
-            List<Mark> list0 = new ArrayList<Mark>();
+            List<Mark> lst = new ArrayList<Mark>();
             while (rsGetAllMark.next()) {
-                Mark tempMark1 = new Mark();
+                Mark tempMark1 = new Mark(0,0,0,0);
                 tempMark1.setId(rsGetAllMark.getInt("ID"));
                 tempMark1.setValue(rsGetAllMark.getInt("VALUE"));
                 tempMark1.setStudentId(rsGetAllMark.getInt("STUDENT_ID"));
                 tempMark1.setSubjectId(rsGetAllMark.getInt("SUBJECT_ID"));
-                list0.add(tempMark1);
+                lst.add(tempMark1);
             }
-            return list0;
+            return lst;
         } catch (SQLException exc) {
             throw new DaoException ("Exception for DAO", exc);
         }
@@ -142,21 +138,19 @@ public class MySqlMarkDao implements MarkDao {
 
     // Return a list of Marks of one Student as per received primary 'key'
     @Override
-    public List<Mark> getAllMarkOneStud (int key) throws DaoException {
+    public List<Mark> getAllMarkOneStud (Mark mark) throws DaoException {
         ResultSet rsGetAllMarkOneStud = null;
         try {
-            psGetAllMarkOneStud.setInt(1, key);
+            psGetAllMarkOneStud.setInt(1, mark.getStudentId());
             rsGetAllMarkOneStud = psGetAllMarkOneStud.executeQuery();
-            List<Mark> list1 = new ArrayList<Mark>();
+            List<Mark> lst = new ArrayList<Mark>();
             while (rsGetAllMarkOneStud.next()) {
-                Mark tempMark2 = new Mark();
-                tempMark2.setId(rsGetAllMarkOneStud.getInt("ID"));
-                tempMark2.setValue(rsGetAllMarkOneStud.getInt("VALUE"));
-                tempMark2.setStudentId(rsGetAllMarkOneStud.getInt("STUDENT_ID"));
-                tempMark2.setSubjectId(rsGetAllMarkOneStud.getInt("SUBJECT_ID"));
-                list1.add(tempMark2);
+                mark.setId(rsGetAllMarkOneStud.getInt("ID"));
+                mark.setValue(rsGetAllMarkOneStud.getInt("VALUE"));
+                mark.setSubjectId(rsGetAllMarkOneStud.getInt("SUBJECT_ID"));
+                lst.add(mark);
             }
-            return list1;
+            return lst;
         } catch (SQLException exc) {
             throw new DaoException ("Exception for DAO", exc);
         }

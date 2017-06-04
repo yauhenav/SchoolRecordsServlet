@@ -1,17 +1,24 @@
 package les11.logic.dto;
 
-import java.util.*;
-
-import les11.logic.controller.*;
-import les11.logic.dao.*;
-import les11.logic.exception.*;
-import les11.logic.mysql.*;
-
 public class Mark {
     private int id;
     private int value;
-    private int StudentId;
-    private int SubjectId;
+    private int studentId;
+    private int subjectId;
+
+    public Mark(int id) {
+        this.id = id;
+        value = 0;
+        studentId = 0;
+        subjectId = 0;
+    }
+
+    public Mark (int id, int value, int studentId, int subjectId) {
+        this.id = id;
+        this.value = value;
+        this.studentId = studentId;
+        this.subjectId = subjectId;
+    }
 
     public int getId() {
         return id;
@@ -30,21 +37,21 @@ public class Mark {
     }
 
     public int getStudentId() {
-        return StudentId;
+        return studentId;
     }
-    public void setStudentId(int StudentId) {
-        this.StudentId = StudentId;
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
     public int getSubjectId() {
-        return SubjectId;
+        return subjectId;
     }
 
-    public void setSubjectId(int SubjectId) {
-        this.SubjectId = SubjectId;
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
     }
 
     public String toString() {
-        return "[" + this.StudentId +"'s mark for " + this.SubjectId + " is " + this.value + "]";
+        return "[" + this.studentId +"'s mark for " + this.subjectId + " is " + this.value + "]";
     }
 }

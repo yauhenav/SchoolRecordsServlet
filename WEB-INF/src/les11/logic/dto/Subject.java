@@ -1,15 +1,18 @@
 package les11.logic.dto;
 
-import java.util.*;
-
-import les11.logic.controller.*;
-import les11.logic.dao.*;
-import les11.logic.exception.*;
-import les11.logic.mysql.*;
-
 public class Subject {
     private int id;
     private String description;
+
+    public Subject(int id) {
+        this.id = id;
+        description = null;
+    }
+
+    public Subject(int id, String description) {
+        this.id = id;
+        this.description = description;
+    }
 
     public int getId() {
         return id;
@@ -28,6 +31,6 @@ public class Subject {
     }
 
     public String toString() {
-        return "[Subject description: " + this.description + "]";
+        return "[Subject description: " + this.description + ", ID No." + this. id + "]";
     }
 }

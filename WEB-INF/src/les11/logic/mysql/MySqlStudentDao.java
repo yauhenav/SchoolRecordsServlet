@@ -3,13 +3,11 @@ package les11.logic.mysql;
 import java.sql.*;
 import java.util.*;
 
-import les11.logic.controller.*;
 import les11.logic.dao.*;
 import les11.logic.dto.*;
 import les11.logic.exception.*;
 
 public class MySqlStudentDao implements StudentDao {
-    private Connection connection;
     private final static String SQL_CREATE = "INSERT INTO daotrain.STUDENT (ID, NAME, SURNAME) VALUES (?, ?, ?)";
     private final static String SQL_READ = "SELECT ID, NAME, SURNAME FROM daotrain.STUDENT WHERE ID = ?";
     private final static String SQL_UPDATE = "UPDATE daotrain.STUDENT SET NAME = ?, SURNAME = ? WHERE ID = ?";
@@ -25,7 +23,6 @@ public class MySqlStudentDao implements StudentDao {
     // Constructor
     public MySqlStudentDao(Connection connection) throws DaoException {
         try {
-            this.connection = connection;
             psCreateStud = connection.prepareStatement(SQL_CREATE);
             psReadStud = connection.prepareStatement(SQL_READ);
             psUpdStud = connection.prepareStatement(SQL_UPDATE);
@@ -107,15 +104,15 @@ public class MySqlStudentDao implements StudentDao {
         ResultSet rsGetAllStud = null;
         try {
             rsGetAllStud = psGetAllStud.executeQuery();
-            List<Student> list = new ArrayList<Student>();
+            List<Student> lst = new ArrayList<Student>();
             while (rsGetAllStud.next()) {
-                Student tempStud1 = new Student(0, null, null);
-                tempStud1.setId(rsGetAllStud.getInt("ID"));
-                tempStud1.setName(rsGetAllStud.getString("NAME"));
-                tempStud1.setSurname(rsGetAllStud.getString("SURNAME"));
-                list.add(tempStud1);
+                Student stud = new Student(0, null, null);
+                stud.setId(rsGetAllStud.getInt("ID"));
+                stud.setName(rsGetAllStud.getString("NAME"));
+                stud.setSurname(rsGetAllStud.getString("SURNAME"));
+                lst.add(stud);
             }
-            return list;
+            return lst;
         } catch (SQLException exc) {
             throw new DaoException ("Exception for DAO", exc);
         }

@@ -3,13 +3,12 @@ package les11.logic.mysql;
 import java.sql.*;
 import java.util.*;
 
-import les11.logic.controller.*;
 import les11.logic.dao.*;
 import les11.logic.dto.*;
 import les11.logic.exception.*;
 
 public class MySqlSubjectDao implements SubjectDao {
-    private Connection connection;
+
     private final static String SQL_CREATE = "INSERT INTO daotrain.SUBJECT (ID, DESCRIPTION) VALUES (?, ?)";
     private final static String SQL_READ = "SELECT ID, DESCRIPTION FROM daotrain.SUBJECT WHERE ID = ?";
     private final static String SQL_UPDATE = "UPDATE daotrain.SUBJECT SET DESCRIPTION = ? WHERE ID = ?";
@@ -25,7 +24,6 @@ public class MySqlSubjectDao implements SubjectDao {
     // Constructor
     public MySqlSubjectDao(Connection connection) throws DaoException {
         try {
-            this.connection = connection;
             psCreateSubj = connection.prepareStatement(SQL_CREATE);
             psReadSubj = connection.prepareStatement(SQL_READ);
             psUpdSubj = connection.prepareStatement(SQL_UPDATE);
@@ -44,22 +42,21 @@ public class MySqlSubjectDao implements SubjectDao {
             psCreateSubj.setString(2, subject.getDescription());
             psCreateSubj.execute();
         } catch (SQLException exc) {
-            throw new DaoException ("Excepion for DAO", exc);
+            throw new DaoException ("Exception for DAO", exc);
         }
     }
 
     // Return the object corresponding to the DB entry with received primary 'key'
     @Override
-    public Subject read(int key) throws DaoException {
+    public Subject read(Subject subject) throws DaoException {
         ResultSet rsReadSubj = null;
         try {
-            psReadSubj.setInt(1, key);
+            psReadSubj.setInt(1, subject.getId());
             rsReadSubj = psReadSubj.executeQuery();
             rsReadSubj.next();
-            Subject tempSubj0 = new Subject();
-            tempSubj0.setId(rsReadSubj.getInt("ID"));
-            tempSubj0.setDescription(rsReadSubj.getString("DESCRIPTION"));
-            return tempSubj0;
+            subject.setId(rsReadSubj.getInt("ID"));
+            subject.setDescription(rsReadSubj.getString("DESCRIPTION"));
+            return subject;
         } catch (SQLException exc) {
             throw new DaoException ("Exception for Dao", exc);
         }
@@ -90,9 +87,9 @@ public class MySqlSubjectDao implements SubjectDao {
 
     // Remove the DB entry as per corresponding received object
     @Override
-    public void delete(int key) throws DaoException {
+    public void delete(Subject subject) throws DaoException {
         try {
-            psDelSubj.setInt(1, key);
+            psDelSubj.setInt(1, subject.getId());
             psDelSubj.execute();
         } catch (SQLException exc) {
             throw new DaoException ("Exception for DAO", exc);
@@ -107,7 +104,7 @@ public class MySqlSubjectDao implements SubjectDao {
             rsGetAllSubj = psGetAllSubj.executeQuery();
             List<Subject> list = new ArrayList<Subject>();
             while (rsGetAllSubj.next()) {
-                Subject tempSubj1 = new Subject();
+                Subject tempSubj1 = new Subject(0, null);
                 tempSubj1.setId(rsGetAllSubj.getInt("ID"));
                 tempSubj1.setDescription(rsGetAllSubj.getString("DESCRIPTION"));
                 list.add(tempSubj1);

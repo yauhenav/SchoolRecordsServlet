@@ -9,7 +9,7 @@ import les11.logic.exception.*;
 
 public class MySqlDaoFactory implements DaoFactory {
 
-    Connection connection = null;
+    private Connection connection = null;
 
     // Constructor
     public MySqlDaoFactory() throws DaoException {
@@ -41,7 +41,7 @@ public class MySqlDaoFactory implements DaoFactory {
         return new MySqlMarkDao(connection);
     }
 
-    // Closes Connection instance object
+    // Close Connection instance object
     @Override
     public void close() throws DaoException {
         if (connection != null) {
