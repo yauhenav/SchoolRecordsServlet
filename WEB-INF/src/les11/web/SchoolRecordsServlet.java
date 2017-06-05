@@ -79,7 +79,7 @@ public class SchoolRecordsServlet extends HttpServlet {
                 default:
                     pw.println("Your request doesn't match any available action");
             }
-        } catch (DaoException exc) {
+        } catch (DaoException | ServiceException exc) {
             exc.printStackTrace();
             pw.println("An error occurred while trying to process your request");
         }
@@ -88,7 +88,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Display all students
      */
-    private void executeShowAllStudents(PrintWriter pw, Service sesMngObj, HttpSession sessObj) throws DaoException {
+    private void executeShowAllStudents(PrintWriter pw, Service sesMngObj, HttpSession sessObj) throws DaoException, ServiceException {
         pw.println("<B>Here's a list of all students in the DB</B>");
         pw.println("<table border=1>");
         //Uncomment the line below to print session number to web-page for test purposes
@@ -108,7 +108,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Display one specified student
      */
-    private void executeShowOneStudent (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeShowOneStudent (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String paramVal = req.getParameter("show_student_ID");
         if (paramVal.matches("[0-9]+")) {
             int key = Integer.parseInt(paramVal);
@@ -129,7 +129,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Add new student
      */
-    private void executeAddNewStudent (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeAddNewStudent (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String idValue = req.getParameter("new_student_ID");
         String nameValue = req.getParameter("new_student_name");
         String surnameValue = req.getParameter("new_student_surname");
@@ -150,7 +150,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Update existing student
      */
-    private void executeUpdateStudent (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeUpdateStudent (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String idValue = req.getParameter("update_student_ID");
         String nameValue = req.getParameter("update_student_name");
         String surnameValue = req.getParameter("update_student_surname");
@@ -171,7 +171,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Delete specified student
      */
-    private void executeDeleteStudent (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeDeleteStudent (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String idValue = req.getParameter("delete_student_ID");
         if (idValue.matches("[0-9]+")) {
             int id = Integer.parseInt(idValue);
@@ -189,7 +189,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Display one specified subject
      */
-    private void executeShowOneSubject (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeShowOneSubject (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String paramVal = req.getParameter("show_subject_ID");
         if (paramVal.matches("[0-9]+")) {
             int key = Integer.parseInt(paramVal);
@@ -210,7 +210,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Display all subjects
      */
-    private void executeShowAllSubjects (PrintWriter pw, Service sesMngObj) throws DaoException {
+    private void executeShowAllSubjects (PrintWriter pw, Service sesMngObj) throws DaoException, ServiceException {
         pw.println("<B>Here's a list of all subjects in the DB</B>");
         pw.println("<table border=1>");
         List<Subject> lst = sesMngObj.displayAllSubjects();
@@ -226,7 +226,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Add new subject
      */
-    private void executeAddNewSubject (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeAddNewSubject (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String idValue = req.getParameter("new_subject_ID");
         String descriptionValue = req.getParameter("new_subject_description");
         if (idValue.matches("[0-9]+") && descriptionValue.matches("[A-Za-z]+")) {
@@ -245,7 +245,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Update existing subject
      */
-    private void executeUpdateExistingSubject (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeUpdateExistingSubject (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String idValue = req.getParameter("update_subject_ID");
         String descriptionValue = req.getParameter("update_subject_description");
         if (idValue.matches("[0-9]+") && descriptionValue.matches("[A-Za-z]+")) {
@@ -264,7 +264,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Delete specified subject
      */
-    private void executeDeleteSpecifiedSubject (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeDeleteSpecifiedSubject (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String idValue = req.getParameter("delete_subject_ID");
         if (idValue.matches("[0-9]+")) {
             int id = Integer.parseInt(idValue);
@@ -282,7 +282,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Show one specified mark
      */
-    private void executeShowOneSpecifiedMark (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeShowOneSpecifiedMark (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String paramVal = req.getParameter("show_mark_ID");
         if (paramVal.matches("[0-9]+")) {
             int id = Integer.parseInt(paramVal);
@@ -303,7 +303,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Show all marks
      */
-    private void executeShowAllMarks (PrintWriter pw, Service sesMngObj) throws DaoException {
+    private void executeShowAllMarks (PrintWriter pw, Service sesMngObj) throws DaoException, ServiceException {
         pw.println("<B>Here's a list of all marks in the DB</B>");
         pw.println("<table border=1>");
         List<Mark> lst = sesMngObj.displayAllMarks();
@@ -319,7 +319,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Display all marks of one student
      */
-    private void executeShowMarksOneStudent (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeShowMarksOneStudent (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String paramVal = req.getParameter("show_all_marks_1stud");
         if (paramVal.matches("[0-9]+")) {
             int studentId = Integer.parseInt(paramVal);
@@ -343,7 +343,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Add new mark
      */
-    private void executeAddNewMark (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeAddNewMark (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String idValue = req.getParameter("new_mark_ID");
         String valueValue = req.getParameter("new_mark_value");
         String studentIdValue = req.getParameter("new_mark_studentId");
@@ -370,7 +370,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Update existing mark
      */
-    private void executeUpdateExistingMark (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeUpdateExistingMark (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String idValue = req.getParameter("update_mark_ID");
         String valueValue = req.getParameter("update_mark_value");
         String studentIdValue = req.getParameter("update_mark_studentId");
@@ -397,7 +397,7 @@ public class SchoolRecordsServlet extends HttpServlet {
     /**
      * Delete specified mark
      */
-    private void executeDeleteSpecifiedMark (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException {
+    private void executeDeleteSpecifiedMark (PrintWriter pw, Service sesMngObj, HttpServletRequest req) throws DaoException, ServiceException {
         String idValue = req.getParameter("delete_mark_ID");
         if (idValue.matches("[0-9]+")) {
             int id = Integer.parseInt(idValue);
