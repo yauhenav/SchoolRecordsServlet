@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSessionListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSession;
 
-import les11.logic.controller.*;
+import les11.logic.service.*;
 import les11.logic.exception.ServiceException;
 
 /**

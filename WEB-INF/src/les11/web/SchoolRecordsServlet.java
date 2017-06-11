@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import les11.logic.controller.*;
+import les11.logic.service.*;
 import les11.logic.dto.*;
 import les11.logic.exception.*;
 

@@ -3,7 +3,7 @@ package les11.logic.dao;
 import java.util.*;
 import java.sql.*;
 
-import les11.logic.controller.*;
+import les11.logic.service.*;
 import les11.logic.dto.*;
 import les11.logic.exception.*;
 import les11.logic.mysql.*;

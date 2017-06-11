@@ -1,4 +1,4 @@
-package les11.logic.controller;
+package les11.logic.service;
 
 import java.util.*;
 
